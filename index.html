@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tetify — Řešíme problémy, které vás brzdí</title>
+<meta name="description" content="Tetify staví digitální produkty, interní systémy na míru, AI integrace a e-shopy. Migrace ze Shoptetu na Shopify, propojení systémů a spolehlivá IT podpora.">
+<meta name="theme-color" content="#050807">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tetify — Řešíme problémy, které vás brzdí">
+<meta property="og:description" content="Digitální produkty, interní systémy, AI integrace, e-shopy a IT podpora. Od nápadu po provoz.">
+<meta property="og:image" content="assets/logotet.png">
+<meta property="og:locale" content="cs_CZ">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+
+<!-- ══ PRELOADER ══ -->
+<div class="preloader" id="preloader">
+  <div class="preloader__inner">
+    <img src="assets/logotet.png" alt="Tetify" class="preloader__logo">
+    <div class="preloader__bar"><span id="preBar"></span></div>
+    <div class="preloader__pct"><span id="prePct">0</span>%</div>
+  </div>
+</div>
+
+<!-- ══ AMBIENT LAYERS ══ -->
+<canvas id="webgl" class="webgl"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow glow--a" aria-hidden="true"></div>
+<div class="glow glow--b" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+<div class="scrollbar" aria-hidden="true"><span id="scrollBar"></span></div>
+
+<!-- ══ HEADER ══ -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="#top" class="brand" aria-label="Tetify — domů">
+      <img src="assets/logotet.png" alt="Tetify" class="brand__logo">
+    </a>
+
+    <nav class="nav" aria-label="Hlavní navigace">
+      <a href="#sluzby" class="nav__link"><span>Služby</span></a>
+      <a href="#produkty" class="nav__link"><span>Produkty</span></a>
+      <a href="#prace" class="nav__link"><span>Práce</span></a>
+      <a href="#proces" class="nav__link"><span>Proces</span></a>
+      <a href="#faq" class="nav__link"><span>FAQ</span></a>
+    </nav>
+
+    <div class="header__actions">
+      <a href="#kontakt" class="btn btn--sm btn--primary magnetic"><span>Nezávazná konzultace</span></a>
+      <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="menu" id="menu">
+  <div class="menu__bg"></div>
+  <nav class="menu__nav">
+    <a href="#sluzby" class="menu__link"><em>01</em> Služby</a>
+    <a href="#produkty" class="menu__link"><em>02</em> Produkty</a>
+    <a href="#prace" class="menu__link"><em>03</em> Práce</a>
+    <a href="#proces" class="menu__link"><em>04</em> Proces</a>
+    <a href="#faq" class="menu__link"><em>05</em> FAQ</a>
+    <a href="#kontakt" class="menu__link"><em>06</em> Kontakt</a>
+  </nav>
+  <div class="menu__foot">
+    <a href="mailto:info@tetify.cz">info@tetify.cz</a>
+    <span>Tetify s.r.o.</span>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero__content">
+    <h1 class="hero__title" data-split>Řešíme problémy, které <em>vás brzdí</em>.</h1>
+
+    <p class="hero__lead reveal" data-delay="260">
+      Tetify je technologický tým, který navrhuje a staví digitální produkty, interní systémy,
+      AI integrace a e-shopy. Přijdete s problémem — odejdete s funkčním řešením.
+    </p>
+
+    <div class="hero__cta reveal" data-delay="360">
+      <a href="#kontakt" class="btn btn--primary magnetic">
+        <span>Pojďme to vyřešit</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#prace" class="btn btn--ghost magnetic"><span>Naše práce</span></a>
+    </div>
+
+    <div class="hero__marks reveal" data-delay="460">
+      <span class="hero__marksLabel">Důvěřují nám</span>
+      <div class="hero__marksList">
+        <img src="assets/logos/cot.svg" alt="Český olympijský tým" title="Český olympijský tým" class="cl cl--cot">
+        <img src="assets/logos/waca.svg" alt="We Are Creative Agency" title="We Are Creative Agency" class="cl cl--waca">
+        <img src="assets/logos/fleysen.png" alt="Fleysen" title="Fleysen" class="cl cl--fleysen">
+        <img src="assets/logos/theis.svg" alt="Theis" title="theis.cz" class="cl cl--theis">
+        <img src="assets/logos/pokis.png" alt="Pokis" title="pokis.cz" class="cl cl--pokis">
+      </div>
+    </div>
+  </div>
+
+  <a href="#sluzby" class="scrollcue" aria-label="Posunout dolů">
+    <span class="scrollcue__line"><i></i></span>
+    <span class="scrollcue__txt">Scroll</span>
+  </a>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <div class="marquee__group">
+      <span>Digitální produkty</span><i>◆</i><span>Interní systémy</span><i>◆</i><span>AI integrace</span><i>◆</i>
+      <span>Shoptet → Shopify</span><i>◆</i><span>API &amp; integrace</span><i>◆</i><span>IT podpora</span><i>◆</i>
+      <span>Automatizace</span><i>◆</i><span>Webové aplikace</span><i>◆</i><span>Sociální sítě</span><i>◆</i>
+    </div>
+    <div class="marquee__group">
+      <span>Digitální produkty</span><i>◆</i><span>Interní systémy</span><i>◆</i><span>AI integrace</span><i>◆</i>
+      <span>Shoptet → Shopify</span><i>◆</i><span>API &amp; integrace</span><i>◆</i><span>IT podpora</span><i>◆</i>
+      <span>Automatizace</span><i>◆</i><span>Webové aplikace</span><i>◆</i><span>Sociální sítě</span><i>◆</i>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLUŽBY ══ -->
+<section class="section" id="sluzby">
+  <div class="wrap">
+    <header class="shead">
+      <span class="eyebrow reveal"><i></i>Co děláme</span>
+      <h2 class="shead__title" data-split>Jeden tým. <em>Celá cesta</em> od nápadu k provozu.</h2>
+      <p class="shead__lead reveal" data-delay="200">
+        Nepředáváme vás mezi agenturami. Navrhneme, postavíme, nasadíme a pak se o to staráme.
+      </p>
+    </header>
+
+    <div class="cards">
+      <article class="card spotlight reveal card--scene" data-delay="0">
+        <div class="scene" aria-hidden="true">
+          <div class="s1"><i></i><i></i><i></i></div>
+        </div>
+        <h3 class="card__title">Digitální produkty na míru</h3>
+        <p class="card__text">Od prvního náčrtu po produkci. Webové aplikace, portály a platformy, které stojí na vlastních nohou a dají se roky rozvíjet.</p>
+        <ul class="card__tags"><li>Web apps</li><li>Portály</li><li>SaaS</li></ul>
+      </article>
+
+      <article class="card spotlight reveal card--scene" data-delay="80">
+        <div class="scene" aria-hidden="true">
+          <div class="s2">
+            <span class="s2__row"><i></i><b style="--w:38%"></b></span>
+            <span class="s2__row"><i></i><b style="--w:68%"></b></span>
+            <span class="s2__row"><i></i><b style="--w:24%"></b></span>
+          </div>
+        </div>
+        <h3 class="card__title">Interní systémy a automatizace</h3>
+        <p class="card__text">Nástroje šité na váš proces — evidence, sklad, schvalování, reporting. Konec tabulek, které nikdo neudržuje.</p>
+        <ul class="card__tags"><li>Interní nástroje</li><li>Workflow</li><li>Reporting</li></ul>
+      </article>
+
+      <article class="card spotlight card--accent reveal card--scene" data-delay="160">
+        <div class="scene" aria-hidden="true">
+          <div class="s3">
+            <u></u><u></u><u></u>
+            <div class="s3__core"></div>
+            <b>PDF</b><b>e-mail</b><b>tabulka</b>
+          </div>
+        </div>
+        <h3 class="card__title">AI integrace</h3>
+        <p class="card__text">Napojíme AI tam, kde reálně ušetří čas: zpracování dokumentů, asistenti nad vašimi daty, klasifikace, generování obsahu.</p>
+        <ul class="card__tags"><li>LLM</li><li>Asistenti</li><li>Zpracování dat</li></ul>
+      </article>
+
+      <article class="card spotlight reveal card--scene" data-delay="0">
+        <div class="scene" aria-hidden="true">
+          <div class="s4">
+            <em>Shoptet</em>
+            <span class="s4__rail"><span class="s4__fill"></span><span class="s4__box"></span></span>
+            <em>Shopify</em>
+          </div>
+        </div>
+        <h3 class="card__title">E-shopy a migrace</h3>
+        <p class="card__text">Převádíme e-shopy ze Shoptetu na Shopify bez ztráty dat, SEO a tržeb. Včetně přepisů URL, importů a napojení skladu.</p>
+        <ul class="card__tags"><li>Shoptet → Shopify</li><li>SEO přesměrování</li><li>Import dat</li></ul>
+      </article>
+
+      <article class="card spotlight reveal card--scene" data-delay="80">
+        <div class="scene" aria-hidden="true">
+          <svg class="s5" viewBox="0 0 300 130">
+            <g class="s5__link">
+              <path d="M62 38 L150 65"/><path d="M62 100 L150 65"/>
+              <path d="M150 65 L238 38"/><path d="M150 65 L238 100"/>
+            </g>
+            <g class="s5__node">
+              <circle cx="62" cy="38" r="9"/><circle cx="62" cy="100" r="9"/>
+              <circle cx="238" cy="38" r="9"/><circle cx="238" cy="100" r="9"/>
+            </g>
+            <circle class="s5__hub" cx="150" cy="65" r="14"/>
+          </svg>
+        </div>
+        <h3 class="card__title">Integrace a API</h3>
+        <p class="card__text">Propojíme systémy, které spolu neumí mluvit — ERP, účetnictví, CRM, marketing, dopravce. Jednou nastavit, pak už jen běží.</p>
+        <ul class="card__tags"><li>REST / GraphQL</li><li>Webhooky</li><li>Synchronizace</li></ul>
+      </article>
+
+      <article class="card spotlight reveal card--scene" data-delay="160">
+        <div class="scene" aria-hidden="true">
+          <div class="s6">
+            <svg viewBox="0 0 64 74">
+              <path class="s6__outline" d="M32 4l24 9v20c0 14.5-9.8 27.2-24 33C17.8 60.2 8 47.5 8 33V13l24-9z"/>
+              <path class="s6__chk" d="M21 35.5l8.5 8.5L44 29"/>
+            </svg>
+            <span class="s6__scan"></span>
+          </div>
+        </div>
+        <h3 class="card__title">IT podpora a správa</h3>
+        <p class="card__text">Každodenní provoz bez stresu. Zařízení, sítě, účty, zálohy, bezpečnost — a někdo, kdo zvedne telefon.</p>
+        <ul class="card__tags"><li>Helpdesk</li><li>Infrastruktura</li><li>Bezpečnost</li></ul>
+      </article>
+
+      <article class="card card--wide spotlight reveal card--scene">
+        <div class="scene scene--wide" aria-hidden="true">
+          <svg class="s7" viewBox="0 0 170 96">
+            <path class="s7__ghost" d="M4 82 L32 70 L60 74 L88 50 L116 55 L144 26 L166 12"/>
+            <path class="s7__area" d="M4 82 L32 70 L60 74 L88 50 L116 55 L144 26 L166 12 L166 92 L4 92 Z"/>
+            <path class="s7__line" d="M4 82 L32 70 L60 74 L88 50 L116 55 L144 26 L166 12"/>
+            <circle class="s7__dot" cx="166" cy="12" r="4.5"/>
+          </svg>
+        </div>
+        <div class="card__wideBody">
+          <h3 class="card__title">Marketingová komunikace a sociální sítě</h3>
+          <p class="card__text">
+            Kampaně pro koncové zákazníky i B2B a průběžná správa sociálních sítí — obsah,
+            který stojí na datech, ne na dojmech. Umíme se zapojit přímo do vašeho inhouse
+            týmu místo toho, abychom fungovali vedle něj.
+          </p>
+        </div>
+        <ul class="card__tags"><li>Sociální sítě</li><li>Kampaně</li><li>B2B komunikace</li><li>Obsah</li><li>Reporting</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUKTY ══ -->
+<section class="section section--alt" id="produkty">
+  <div class="wrap">
+    <header class="shead">
+      <span class="eyebrow reveal"><i></i>Vlastní produkty</span>
+      <h2 class="shead__title" data-split>Nejen na zakázku. <em>Stavíme i své.</em></h2>
+      <p class="shead__lead reveal" data-delay="200">
+        Vlastní produkty nás nutí řešit stejné problémy jako vy — provoz, škálování, uživatele.
+        Zkušenosti z nich pak dostanete i vy.
+      </p>
+    </header>
+
+    <div class="products">
+      <a href="https://theis.cz" target="_blank" rel="noopener" class="product spotlight reveal">
+        <div class="product__top">
+          <span class="product__brand">
+            <img src="assets/logos/theis.svg" alt="" class="product__logo">
+            <span class="product__name">theis<em>.cz</em></span>
+          </span>
+          <span class="product__badge">Live</span>
+        </div>
+        <p class="product__text">
+          Od karty z kamery po hotové video na šesti sítích. THEIS řídí celou cestu obsahu —
+          automatické renderování videí, publikaci na sítě i fotoknihovnu, která snímky
+          roztřídí, popíše a pošle lidem, kteří na nich jsou.
+        </p>
+        <div class="product__foot">
+          <span>Navštívit</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </div>
+        <div class="product__viz product__viz--a"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </a>
+
+      <a href="https://pokis.cz" target="_blank" rel="noopener" class="product spotlight reveal" data-delay="120">
+        <div class="product__top">
+          <span class="product__brand">
+            <img src="assets/logos/pokis.png" alt="" class="product__logo">
+            <span class="product__name">pokis<em>.cz</em></span>
+          </span>
+          <span class="product__badge">Live</span>
+        </div>
+        <p class="product__text">
+          Heureka na pokémony. Hlídač cen a skladů Pokémon TCG napříč desítkami českých
+          e-shopů — jedna cena, jeden stav skladu a upozornění na telefon ve chvíli,
+          kdy se karta naskladní nebo zlevní.
+        </p>
+        <div class="product__foot">
+          <span>Navštívit</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </div>
+        <div class="product__viz product__viz--b"><i></i><i></i><i></i></div>
+      </a>
+
+      <div class="product product--cta spotlight reveal" data-delay="240">
+        <div class="product__top"><span class="product__name">váš<em> produkt</em></span></div>
+        <p class="product__text">Máte nápad, který zatím žije v hlavě a v tabulce? Pojďme z něj udělat věc, kterou lidi používají.</p>
+        <a href="#kontakt" class="btn btn--primary btn--sm magnetic"><span>Probrat nápad</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRÁCE / REFERENCE ══ -->
+<section class="section" id="prace">
+  <div class="wrap">
+    <header class="shead">
+      <span class="eyebrow reveal"><i></i>Vybraná práce</span>
+      <h2 class="shead__title" data-split>Projekty, které <em>běží v ostrém provozu</em>.</h2>
+      <p class="shead__lead reveal" data-delay="200">
+        Od interního helpdesku pro olympijský tým po 3D konfigurátor obalů.
+        Každý z nich začal jednou konkrétní věcí, která nefungovala.
+      </p>
+    </header>
+
+    <!-- ── featured case ── -->
+    <article class="case case--hero spotlight reveal">
+      <div class="case__body">
+        <div class="case__head">
+          <span class="case__logo"><img src="assets/logos/cot.svg" alt="Český olympijský výbor"></span>
+          <span class="case__client">Český olympijský výbor<em>Interní IT podpora</em></span>
+        </div>
+        <h3 class="case__title">Slack, e-mail i web — jedno místo pro všechna hlášení</h3>
+        <p class="case__text">
+          Požadavky chodily třemi kanály a v každém se ztrácely jinak. Postavili jsme aplikaci,
+          která je slučuje do jednoho helpdesku: uživatel nahlásí problém tam, kde je zvyklý —
+          ve Slacku, e-mailem nebo přes webový formulář — a tiket vznikne sám. Notifikace se
+          vracejí do stejného kanálu, ze kterého hlášení přišlo, takže nikdo nemusí nic hlídat jinde.
+        </p>
+        <p class="case__text">
+          Celé je to kompletně napojené a průběžně synchronizované do Asany — tikety, stavy
+          i přiřazení odpovídají tomu, co tým reálně vidí ve svých projektech. Nikdo nic nepřepisuje
+          ručně a nevzniká druhá verze pravdy.
+        </p>
+        <ul class="case__tags"><li>Slack API</li><li>E-mailový příjem</li><li>Webová hlášenka</li><li>Sync do Asany</li><li>Notifikace</li><li>Reporting</li></ul>
+      </div>
+
+      <div class="case__viz" aria-hidden="true">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__dots"><i></i><i></i><i></i></span>
+            <span class="mock__name">Helpdesk</span>
+          </div>
+
+          <div class="mock__rows">
+            <div class="mrow">
+              <span class="mrow__ch mrow__ch--slack">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4v11M15 9v11M4 9h11M9 15h11"/></svg>
+              </span>
+              <span class="mrow__txt"><b>Nejde přihlášení do intranetu</b><em>#it-podpora · před 2 min</em></span>
+              <span class="mrow__st mrow__st--new">Nové</span>
+            </div>
+
+            <div class="mrow">
+              <span class="mrow__ch mrow__ch--mail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7.5l8 5.5 8-5.5"/></svg>
+              </span>
+              <span class="mrow__txt"><b>Žádost o přístup do systému</b><em>e-mail · před 18 min</em></span>
+              <span class="mrow__st mrow__st--wip">Řeší se</span>
+            </div>
+
+            <div class="mrow">
+              <span class="mrow__ch mrow__ch--web">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/></svg>
+              </span>
+              <span class="mrow__txt"><b>Tiskárna ve 2. patře nereaguje</b><em>webová hlášenka · před 1 h</em></span>
+              <span class="mrow__st mrow__st--wip">Řeší se</span>
+            </div>
+
+            <div class="mrow mrow--done">
+              <span class="mrow__ch mrow__ch--slack">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4v11M15 9v11M4 9h11M9 15h11"/></svg>
+              </span>
+              <span class="mrow__txt"><b>Notebook se nenabíjí</b><em>#it-podpora · včera</em></span>
+              <span class="mrow__st mrow__st--done">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4.5 4.5L19 7"/></svg>
+                Hotovo
+              </span>
+            </div>
+          </div>
+
+          <div class="mock__foot">
+            <span class="mock__chip">Slack</span>
+            <span class="mock__chip">E-mail</span>
+            <span class="mock__chip">Web</span>
+            <span class="mock__arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h14M13 7l5 5-5 5"/></svg>
+            </span>
+            <span class="mock__chip mock__chip--out">
+              <b></b>Asana
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── ostatní ── -->
+    <div class="cases">
+
+      <article class="case spotlight reveal">
+        <div class="case__head">
+          <span class="case__logo"><img src="assets/logos/cot.svg" alt="Český olympijský výbor"></span>
+          <span class="case__client">Český olympijský výbor<em>Onboarding</em></span>
+        </div>
+        <h3 class="case__title">Nástup nových lidí bez papírování a bez ztracených kroků</h3>
+        <p class="case__text">
+          Onboardingová aplikace vede nováčka i jeho manažera krok za krokem — úkoly, přístupy,
+          dokumenty k podpisu i školení na jednom místě. Je vidět, co je hotové a kde to vázne,
+          takže nikdo nezůstane týden bez notebooku nebo přístupu do systému.
+        </p>
+        <ul class="case__tags"><li>Onboarding</li><li>Workflow</li><li>Správa přístupů</li></ul>
+      </article>
+
+      <article class="case spotlight reveal" data-delay="80">
+        <div class="case__head">
+          <span class="case__logo"><img src="assets/logos/cot.svg" alt="Český olympijský výbor"></span>
+          <span class="case__client">Český olympijský výbor<em>Modernizace &amp; admin</em></span>
+        </div>
+        <h3 class="case__title">Ze starých systémů udržovatelné aplikace</h3>
+        <p class="case__text">
+          Postupně přepisujeme zděděné systémy, migrujeme data a stavíme admin rozhraní, ve kterých
+          se dá skutečně pracovat. K tomu automatizace, které ušetří ruční překlikávání mezi nástroji —
+          bez velkého třesku, po částech, které jde nasadit a ověřit.
+        </p>
+        <ul class="case__tags"><li>Refaktoring legacy</li><li>Migrace dat</li><li>Admin systémy</li><li>Automatizace</li></ul>
+      </article>
+
+      <article class="case spotlight reveal" data-delay="160">
+        <div class="case__head">
+          <span class="case__logo"><img src="assets/logos/waca.svg" alt="We Are Creative Agency"></span>
+          <span class="case__client">We Are Creative Agency<em>3D konfigurátor</em></span>
+        </div>
+        <h3 class="case__title">Krabička, kterou si zákazník poskládá a hned vidí ve 3D</h3>
+        <p class="case__text">
+          Konfigurátor obalů běžící přímo v prohlížeči. Zákazník zvolí typ krabičky, rozměr,
+          výplň, potisk i barvu, otevře ji posuvníkem a v editoru stran si nastaví jednotlivé
+          plochy — a celou dobu se dívá na živý 3D model, ne na statický obrázek.
+        </p>
+        <ul class="case__tags"><li>3D vizualizace</li><li>Konfigurátor</li><li>Editor stran</li></ul>
+        <a href="https://waca.tetify.cz/" target="_blank" rel="noopener" class="case__link">
+          <span>waca.tetify.cz</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <article class="case spotlight reveal" data-delay="240">
+        <div class="case__head">
+          <span class="case__logo"><img src="assets/logos/fleysen.png" alt="Fleysen"></span>
+          <span class="case__client">Fleysen<em>Migrace e-shopu</em></span>
+        </div>
+        <h3 class="case__title">Přechod ze Shoptetu na Shopify bez výpadku prodeje</h3>
+        <p class="case__text">
+          Kompletní migrace produktů, objednávek a zákazníků, přemapování URL kvůli SEO,
+          nasazení nové šablony a napojení navazujících služeb. E-shop prodával i v den přepnutí.
+        </p>
+        <ul class="case__tags"><li>Shoptet → Shopify</li><li>SEO redirecty</li><li>Import dat</li></ul>
+        <a href="https://fleysen.com" target="_blank" rel="noopener" class="case__link">
+          <span>fleysen.com</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ REFERENCE / TESTIMONIALY ══ -->
+<section class="section section--alt" id="reference">
+  <div class="wrap">
+    <header class="shead">
+      <span class="eyebrow reveal"><i></i>Reference</span>
+      <h2 class="shead__title" data-split>Co o nás <em>říkají klienti</em>.</h2>
+    </header>
+
+    <div class="quotes">
+      <figure class="quote spotlight reveal">
+        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="quote__text">
+          Kompletní marketingová komunikace jak má být. Ať už jde o kampaně pro koncové
+          zákazníky nebo podpora v oblasti B2B. Náš segment je poměrně náročný a jsem rád,
+          že máme odpovídajícího partnery, s kterým se zvládneme posouvat a růst.
+        </blockquote>
+        <figcaption class="quote__foot">
+          <span class="quote__logo"><img src="assets/logos/fleysen.png" alt="Fleysen"></span>
+          <span class="quote__who">Filip Dušek<em>CEO, Fleysen</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote spotlight reveal" data-delay="120">
+        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="quote__text">
+          Tetify pro nás zajišťuje průběžnou správu sociálních sítí. Cením si jejich expertízy
+          a efektivity. Dokáží se zapojit do našich inhouse týmu a zvědnout komunikaci.
+          Jsou datoví a spolehliví.
+        </blockquote>
+        <figcaption class="quote__foot">
+          <span class="quote__logo"><img src="assets/logos/cot.svg" alt="Český olympijský výbor"></span>
+          <span class="quote__who">Tomáš Houska<em>Head of Media House, Český olympijský výbor</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote spotlight reveal">
+        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="quote__text">
+          Pro migraci jsme se rozhodli v momentě, kdy jsme cítili, že pro nás Shoptet není
+          dostatečný. Oslovili jsme proto Václava, který nám vysvětlil výhody Shopify proti
+          Shoptetu, provedl nás celým procesem a postaral se o to, abychom měli plynulý přechod
+          bez ztráty dat nebo díry v obratu. Ještě k tomu celý projekt doručil 14 dní před
+          stanoveným deadlinem. Od té doby nám s e-shopem pomáhá na průběžné bázi
+          a nemůžeme si jej vynachválit.
+        </blockquote>
+        <figcaption class="quote__foot">
+          <span class="quote__logo"><img src="assets/logos/glowly.svg" alt="Glowly"></span>
+          <span class="quote__who">David<em>glowly.cz</em></span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote spotlight reveal" data-delay="120">
+        <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+        <div class="quote__stars" role="img" aria-label="Hodnocení 5 z 5 hvězdiček">★★★★★</div>
+        <blockquote class="quote__text">
+          Spolupráce byla naprosto bezproblémová. Pomohl nám se správným nastavením a měřením
+          e-shopu na platformě Shopify. Velmi oceňuji rychlou komunikaci a především kvalitně
+          odvedenou práci. Vše proběhlo efektivně a s výsledkem, který splnil naše očekávání.
+          Ráda doporučuji dál.
+        </blockquote>
+        <figcaption class="quote__foot">
+          <span class="quote__logo"><img src="assets/logos/honzabartos.svg" alt="Honza Bartoš"></span>
+          <span class="quote__who">Jana<em>honzabartos.cz</em></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats__grid">
+      <div class="stat reveal"><span class="stat__num" data-count="40" data-suffix="+">0</span><span class="stat__lbl">dokončených projektů</span></div>
+      <div class="stat reveal" data-delay="80"><span class="stat__num" data-count="2">0</span><span class="stat__lbl">vlastní produkty v provozu</span></div>
+      <div class="stat reveal" data-delay="160"><span class="stat__num" data-count="100" data-suffix="%">0</span><span class="stat__lbl">projektů dotažených do konce</span></div>
+      <div class="stat reveal" data-delay="240"><span class="stat__num">24/7</span><span class="stat__lbl">dostupnost pro klíčové systémy</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCES ══ -->
+<section class="section" id="proces">
+  <div class="wrap">
+    <header class="shead">
+      <span class="eyebrow reveal"><i></i>Jak pracujeme</span>
+      <h2 class="shead__title" data-split>Žádná magie. <em>Jen pořádek</em> v krocích.</h2>
+    </header>
+
+    <div class="steps" id="steps">
+      <div class="steps__line"><span id="stepsProgress"></span></div>
+
+      <div class="step reveal">
+        <span class="step__num">01</span>
+        <div class="step__body">
+          <h3>Pochopíme problém</h3>
+          <p>Sedneme si k tomu, co vás pálí. Ptáme se na proces, ne na technologie — ty vybereme až potom.</p>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <span class="step__num">02</span>
+        <div class="step__body">
+          <h3>Navrhneme řešení</h3>
+          <p>Dostanete jasný rozsah, odhad a plán. Víte, co se postaví, kdy a za kolik — než začneme psát kód.</p>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <span class="step__num">03</span>
+        <div class="step__body">
+          <h3>Postavíme a nasadíme</h3>
+          <p>Krátké iterace, průběžně vidíte výsledek. Testujeme na reálných datech a nasazujeme bez dramat.</p>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <span class="step__num">04</span>
+        <div class="step__body">
+          <h3>Staráme se a rozvíjíme</h3>
+          <p>Provoz, monitoring, podpora a další vývoj. Nezmizíme den po předání — většina spoluprací pokračuje roky.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section section--alt" id="faq">
+  <div class="wrap wrap--narrow">
+    <header class="shead shead--left">
+      <span class="eyebrow reveal"><i></i>Časté otázky</span>
+      <h2 class="shead__title" data-split>Na co se ptáte <em>nejčastěji</em>.</h2>
+    </header>
+
+    <div class="faq">
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false"><span>Umíte převzít projekt, který začal někdo jiný?</span><i></i></button>
+        <div class="faq__a"><p>Ano, děláme to běžně. Nejdřív si projdeme kód a infrastrukturu, řekneme na rovinu, v jakém je to stavu, a navrhneme, co dořešit hned a co může počkat.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false"><span>Jak dlouho trvá migrace e-shopu ze Shoptetu na Shopify?</span><i></i></button>
+        <div class="faq__a"><p>U běžného e-shopu se bavíme o jednotkách týdnů. Záleží hlavně na počtu produktů, napojených službách a tom, jak moc má být šablona na míru. Přesný odhad dostanete po úvodní analýze.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false"><span>Dává AI smysl i pro menší firmu?</span><i></i></button>
+        <div class="faq__a"><p>Často víc než pro velkou — menší tým ušetří na opakované práci okamžitě. Začínáme jedním konkrétním případem s měřitelným přínosem, ne velkou strategií.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false"><span>Jak probíhá spolupráce a fakturace?</span><i></i></button>
+        <div class="faq__a"><p>Podle typu zakázky — u jasně ohraničených věcí fixní cena, u dlouhodobého rozvoje měsíční kapacita. Vždy víte dopředu, na čem se pracuje a kolik to stojí.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false"><span>Zajistíte i provoz a podporu po spuštění?</span><i></i></button>
+        <div class="faq__a"><p>Ano. Monitoring, aktualizace, zálohy i helpdesk pro uživatele. Většina klientů u nás zůstává právě kvůli tomu, co přijde po spuštění.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ KONTAKT ══ -->
+<section class="section cta" id="kontakt">
+  <div class="wrap">
+    <div class="cta__grid">
+      <div class="cta__left">
+        <span class="eyebrow reveal"><i></i>Kontakt</span>
+        <h2 class="cta__title" data-split>Popište nám problém. <em>Ozveme se do 24 hodin.</em></h2>
+        <p class="cta__lead reveal" data-delay="200">
+          Nepotřebujeme hotové zadání. Stačí, když víte, co vás štve — zbytek vymyslíme společně.
+        </p>
+
+        <div class="cta__info reveal" data-delay="280">
+          <a href="mailto:info@tetify.cz" class="cta__line">
+            <span class="cta__lineLbl">E-mail</span>
+            <span class="cta__lineVal">info@tetify.cz</span>
+          </a>
+          <a href="tel:+420602618220" class="cta__line">
+            <span class="cta__lineLbl">Telefon</span>
+            <span class="cta__lineVal">+420 602 618 220</span>
+          </a>
+          <div class="cta__line">
+            <span class="cta__lineLbl">Kde jsme</span>
+            <span class="cta__lineVal">Praha &amp; Karlovy Vary</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="form reveal" data-delay="160" id="form" novalidate>
+        <div class="field">
+          <input type="text" id="f-name" name="name" required placeholder=" " autocomplete="name">
+          <label for="f-name">Jméno</label>
+        </div>
+        <div class="field">
+          <input type="email" id="f-mail" name="email" required placeholder=" " autocomplete="email">
+          <label for="f-mail">E-mail</label>
+        </div>
+        <div class="field">
+          <input type="text" id="f-comp" name="company" placeholder=" " autocomplete="organization">
+          <label for="f-comp">Firma <em>(nepovinné)</em></label>
+        </div>
+        <div class="field field--chips">
+          <span class="field__lbl">O co jde?</span>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="topic" value="Produkt na míru"><span>Produkt na míru</span></label>
+            <label class="chip"><input type="checkbox" name="topic" value="Interní systém"><span>Interní systém</span></label>
+            <label class="chip"><input type="checkbox" name="topic" value="AI integrace"><span>AI integrace</span></label>
+            <label class="chip"><input type="checkbox" name="topic" value="E-shop / migrace"><span>E-shop / migrace</span></label>
+            <label class="chip"><input type="checkbox" name="topic" value="IT podpora"><span>IT podpora</span></label>
+            <label class="chip"><input type="checkbox" name="topic" value="Něco jiného"><span>Něco jiného</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <textarea id="f-msg" name="message" rows="4" required placeholder=" "></textarea>
+          <label for="f-msg">Co potřebujete vyřešit?</label>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full magnetic">
+          <span>Odeslat poptávku</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="form__note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/logotet.png" alt="Tetify" class="footer__logo">
+        <p>Technologický partner pro firmy, které chtějí věci konečně vyřešit.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Služby</h4>
+          <a href="#sluzby">Produkty na míru</a>
+          <a href="#sluzby">Interní systémy</a>
+          <a href="#sluzby">AI integrace</a>
+          <a href="#sluzby">E-shopy a migrace</a>
+          <a href="#sluzby">IT podpora</a>
+          <a href="#sluzby">Marketing a sociální sítě</a>
+        </div>
+        <div class="footer__col">
+          <h4>Produkty</h4>
+          <a href="https://theis.cz" target="_blank" rel="noopener">theis.cz</a>
+          <a href="https://pokis.cz" target="_blank" rel="noopener">pokis.cz</a>
+        </div>
+        <div class="footer__col">
+          <h4>Kontakt</h4>
+          <a href="mailto:info@tetify.cz">info@tetify.cz</a>
+          <a href="tel:+420602618220">+420 602 618 220</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <div class="legal">
+        <span class="legal__lbl">Sídlo</span>
+        <span class="legal__val">Korunní 2569/108, Vinohrady<br>101 00 Praha 10</span>
+      </div>
+      <div class="legal">
+        <span class="legal__lbl">IČO</span>
+        <span class="legal__val">23715227</span>
+      </div>
+      <div class="legal">
+        <span class="legal__lbl">Spisová značka</span>
+        <span class="legal__val">C 431700 vedená u Městského soudu v Praze</span>
+      </div>
+      <div class="legal">
+        <span class="legal__lbl">Datová schránka</span>
+        <span class="legal__val">sifamru</span>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> Tetify s.r.o. Všechna práva vyhrazena.</span>
+      <span class="footer__made">Postaveno s <b>♥</b> a hodně kávou v ČR</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/scene.js"></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Firebase CLI cache (vzniká při deployi)
+.firebase/
+
+# lokální nastavení nástrojů
+.claude/
+
+node_modules/

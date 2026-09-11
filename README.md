@@ -90,7 +90,7 @@ vykreslují bíle přes CSS filtr `brightness(0) invert(1)`.
 | `pokis.png` | z `AppIcon.png` — odmazané černé pozadí, ořez na glyf, 512×512 RGBA (originál zůstal jako `pokis-original.png`) |
 | `honzabartos.svg` | honzabartos.cz (inline SVG z hlavičky) |
 
-| `glowly.svg` | dodáno klientem (bílá varianta) |
+| `glowly.svg` | dodáno klientem (bílá varianta); `viewBox` oříznutý na kresbu — původně měla kolem sebe ~40 % prázdného plátna. V HTML je `?v=2`, protože obrázky se cachují 30 dní |
 | `blaho.svg` | blaho.work (inline SVG z hlavičky) |
 | `cot-color.svg` | barevná varianta značky ČOV pro světlé mockupy |
 

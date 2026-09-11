@@ -615,6 +615,7 @@ ul{ margin:0; padding:0; list-style:none; }
 .cl--theis{ height:31px; }
 .cl--pokis{ height:34px; }
 .cl--blaho{ height:24px; }
+.cl--glowly{ height:25px; }
 
 /* ═══ CASE STUDIES ═══ */
 .cases{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
@@ -1429,6 +1430,7 @@ a.cta__line:hover .cta__lineVal{ color:var(--green); }
   .cl--theis{ height:22px; }
   .cl--pokis{ height:24px; }
   .cl--blaho{ height:17px; }
+  .cl--glowly{ height:18px; }
   .hero{ min-height:92svh; padding-top:120px; }
   .hero__cta .btn{ flex:1 1 auto; }
   .footer__cols{ grid-template-columns:1fr 1fr; }

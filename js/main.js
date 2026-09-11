@@ -10,42 +10,6 @@
   var lerp = function (a, b, n) { return a + (b - a) * n; };
   var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
 
-  /* ─── PRELOADER ─────────────────────────────────────── */
-  (function preloader () {
-    var el = $('#preloader'), bar = $('#preBar'), pct = $('#prePct');
-    if (!el) return;
-    var p = 0, done = false;
-
-    var tick = setInterval(function () {
-      p += Math.random() * 16 + 5;
-      if (p > 96) p = 96;
-      paint(p);
-    }, 130);
-
-    function paint (v) {
-      if (bar) bar.style.width = v + '%';
-      if (pct) pct.textContent = Math.round(v);
-    }
-
-    function finish () {
-      if (done) return;
-      done = true;
-      clearInterval(tick);
-      paint(100);
-      setTimeout(function () {
-        el.classList.add('is-done');
-        document.body.classList.remove('is-locked');
-        boot();
-        setTimeout(function () { el.remove(); }, 800);
-      }, 380);
-    }
-
-    document.body.classList.add('is-locked');
-    if (document.readyState === 'complete') setTimeout(finish, 500);
-    else window.addEventListener('load', function () { setTimeout(finish, 420); });
-    setTimeout(finish, 3000); // hard safety net
-  })();
-
   /* ─── SPLIT TEXT ────────────────────────────────────── */
   function splitText (el) {
     if (el.dataset.done) return;
@@ -418,7 +382,6 @@
     initCounters();
     initSteps();
   }
-  window.boot = boot;
 
   function early () {
     initScrollUI();
@@ -431,6 +394,14 @@
     initMisc();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', early);
-  else early();
+  function start () {
+    early();
+    // animaci nadpisů pustíme až s načtenými fonty, ať písmena nenaskočí náhradním
+    // fontem a pak neposkočí — ale nejdéle 500 ms, pomalé fonty nesmí držet stránku
+    var fontsReady = (document.fonts && document.fonts.ready) || Promise.resolve();
+    Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 500); })]).then(boot);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 })();

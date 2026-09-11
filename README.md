@@ -7,10 +7,11 @@ Statický web (HTML + CSS + JS + three.js). Žádný build, žádné závislosti
 ```
 index.html          # celá stránka
 css/style.css       # design systém + všechny sekce
-js/main.js          # preloader, reveal animace, menu, kurzor, FAQ, formulář
+js/main.js          # reveal animace, menu, kurzor, FAQ, formulář
 js/scene.js         # three.js pozadí (částice + drátěné jádro)
 assets/logotet.png  # logo Tetify (na tmavém podkladu se invertuje CSS filtrem)
 assets/logos/       # loga klientů a produktů
+assets/apps/        # snímky z App Storu a ikony aplikací (sekce Mobilní aplikace)
 favicon.ico         # + assets/favicon-32.png, favicon-192.png, apple-touch-icon.png
 ```
 
@@ -44,8 +45,20 @@ firebase deploy --only hosting
 
 Konfigurace je ve `firebase.json` — nasazuje se kořen projektu s tím, že
 `README.md`, `.claude/`, `logotet.png` a `assets/logos/pokis-original.png`
-jsou ze zdrojů vyloučené. HTML se neukládá do cache, CSS/JS na hodinu
-s revalidací, obrázky na 30 dní.
+jsou ze zdrojů vyloučené. HTML, CSS i JS mají `no-cache` — prohlížeč se při
+každém načtení zeptá, jestli se soubor změnil (nezměněný vrátí levné 304).
+Obrázky se cachují 30 dní.
+
+Dřív měly CSS/JS hodinovou cache a po deployi to znamenalo nové HTML se starými
+styly. Proto je u nich v `index.html` `?v=…`. Běžné úpravy ho nepotřebují,
+ale **když změníš HTML tak, že bez nového JS/CSS nefunguje** (třeba odstranění
+preloaderu — starý `main.js` s novým HTML nechal úvodní obrazovku prázdnou),
+zvedni `?v=` u všech tří souborů. Kopie uložené dřív bez `no-cache` se jinak můžou
+ještě chvíli použít.
+
+Nadpisy s animací písmen (`data-split`) jsou do rozložení na písmena skryté
+(třída `.js` na `<html>`), aby neblikly. Kdyby se `main.js` nenačetl, CSS je
+po 2 s ukáže samo.
 
 ### Vlastní doména
 
@@ -78,6 +91,8 @@ vykreslují bíle přes CSS filtr `brightness(0) invert(1)`.
 | `honzabartos.svg` | honzabartos.cz (inline SVG z hlavičky) |
 
 | `glowly.svg` | dodáno klientem (bílá varianta) |
+| `blaho.svg` | blaho.work (inline SVG z hlavičky) |
+| `cot-color.svg` | barevná varianta značky ČOV pro světlé mockupy |
 
 **Před spuštěním si ověřte souhlas s užitím.** U referencí je to běžná zdvořilost,
 u Českého olympijského výboru navíc povinnost — olympijská symbolika je v ČR chráněná
@@ -95,6 +110,48 @@ která nejspíš vznikla překlepem — opravte je až po odsouhlasení autorem 
 Hvězdičkové hodnocení je jen u citace od Jany (honzabartos.cz) — jako jediná ho měla.
 Pokud ho máte i od ostatních, přidejte do jejich `<figure>` stejný blok
 `<div class="quote__stars" …>★★★★★</div>`.
+
+## Mockupy projektů
+
+Každý projekt v sekcích Produkty a Práce má náhled v **reálném designu daného projektu**,
+ne v barvách Tetify. Barvy, fonty a prvky UI jsou převzaté přímo z jejich webů
+(zjištěno z computed styles v prohlížeči):
+
+| Projekt | Pozadí | Akcent | Font |
+|---|---|---|---|
+| ČOV Podpora / Onboarding / Podatelna | `#fff`, `#eef1f5` | `#0081c8`, navy `#1a1a2e` | DM Sans |
+| Blaho & work | `#fcf8ff` | `#fda4af` | Poppins + serif¹ |
+| WACA | `#a2b7de` | `#f84b80` | Inter |
+| Fleysen | `#fff` | `#171717`, `#8cac89`, `#f1ba00` | Raptor Text² |
+| Theis | `#f9f6f3` | `#0a7550` | Familjen Grotesk + JetBrains Mono |
+| Pokis | `#0a0a0b` | `#f2c94c`, `#34d399` | Inter |
+
+¹ Blaho používá komerční „Fields Display", nahrazeno DM Serif Display z Google Fonts.
+² Raptor Text je komerční, nahrazeno Inter Tight.
+
+Všechno je čisté HTML/CSS (žádné screenshoty), takže je to ostré na každém displeji
+a animuje se to: mockup se rozehraje, když karta dostane `.is-in`. Styly jsou v bloku
+`MOCKUPY PROJEKTŮ` v `css/style.css`, každý projekt má vlastní prefix (`.mcov`, `.monb`,
+`.mpod`, `.mwaca`, `.mfley`, `.mblaho`, `.mtheis`, `.mpokis`).
+
+Data v mockupech jsou ilustrační — žádné skutečné tikety, dokumenty ani uživatelé.
+
+## Sekce Mobilní aplikace
+
+Snímky jsou originální screenshoty z App Storu (Blaho & work, POKIS, THEIS), převedené
+do WebP (9 souborů, celkem ~234 kB). Mají jen 369×800 px, proto se zobrazují nejvýš
+~176 px široké — větší by byly na retině rozmazané. Pokud dodáš snímky ve vyšším
+rozlišení, stačí přepsat soubory v `assets/apps/` a zvednout `--shot-w` v CSS.
+
+| Soubor | Obsah |
+|---|---|
+| `blaho-1..3.webp` | Ovládání členství a dveří · Kalendář · Komunita |
+| `pokis-1..3.webp` | Všechny nabídky · Kde koupit osobně (mapa) · Sledované obchody |
+| `theis-1..3.webp` | Celý provoz na jedné obrazovce · Všechna videa · Nahrání videa |
+| `icon-blaho/theis.webp` | ikony z App Storu (přes iTunes Search API) |
+| `icon-pokis.webp` | z `pokis-original.png` — POKIS v českém App Storu dohledat nešel |
+
+Odkazy: Blaho & work a THEIS vedou do App Storu, POKIS na pokis.cz.
 
 ## Mikro-scény v sekci „Co děláme“
 

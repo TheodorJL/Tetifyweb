@@ -107,10 +107,6 @@ která nejspíš vznikla překlepem — opravte je až po odsouhlasení autorem 
 - ČOV: „do našich inhouse týmu" → pravděpodobně „do našeho inhouse týmu"
 - ČOV: „zvědnout komunikaci" → pravděpodobně „zvednout komunikaci"
 
-Hvězdičkové hodnocení je jen u citace od Jany (honzabartos.cz) — jako jediná ho měla.
-Pokud ho máte i od ostatních, přidejte do jejich `<figure>` stejný blok
-`<div class="quote__stars" …>★★★★★</div>`.
-
 ## Mockupy projektů
 
 Každý projekt v sekcích Produkty a Práce má náhled v **reálném designu daného projektu**,

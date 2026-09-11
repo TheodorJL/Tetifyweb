@@ -1165,10 +1165,6 @@ ul{ margin:0; padding:0; list-style:none; }
 }
 .quote:hover .quote__mark{ opacity:.24; transform:translateY(-3px); }
 
-.quote__stars{
-  margin-bottom:14px; color:var(--green); font-size:14px; letter-spacing:.24em;
-  text-shadow:0 0 18px rgba(0,224,122,.45);
-}
 .quote__text{
   margin:0 0 26px; font-family:var(--font-dsp); font-weight:400;
   font-size:clamp(16.5px,1.75vw,19.5px); line-height:1.52; letter-spacing:-.015em;

@@ -254,11 +254,10 @@ ul{ margin:0; padding:0; list-style:none; }
   font-family:var(--font-dsp); font-weight:600; letter-spacing:-.035em; line-height:1.08;
   font-size:clamp(31px,5vw,56px); margin:0 0 20px; text-wrap:balance;
 }
-.shead__title em{
-  font-style:normal;
-  background:linear-gradient(105deg,var(--green),var(--green-lt) 45%,var(--teal));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
+/* Zvýrazněná slova měla gradient přes background-clip:text, tedy průhledný text
+   s barevným podkladem. Když ho prohlížeč nevykreslí (Safari to u víceřádkových
+   inline prvků dělá), text úplně zmizí. Plná barva se vykreslí vždycky. */
+.shead__title em{ font-style:normal; color:var(--green-lt); }
 .shead__lead{ font-size:clamp(16px,1.6vw,18.5px); color:var(--fg-2); margin:0; }
 
 /* ═══ HERO ═══ */
@@ -281,11 +280,7 @@ ul{ margin:0; padding:0; list-style:none; }
   font-size:clamp(40px,7.6vw,88px); line-height:1.02; letter-spacing:-.045em;
   margin:0 0 26px; text-wrap:balance;
 }
-.hero__title em{
-  font-style:normal;
-  background:linear-gradient(100deg,var(--green) 5%,var(--green-lt) 48%,var(--teal) 95%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
+.hero__title em{ font-style:normal; color:var(--green-lt); }
 .hero__lead{
   font-size:clamp(16px,1.9vw,20px); color:var(--fg-2); max-width:640px; margin:0 auto 38px;
   text-wrap:pretty;
@@ -1214,8 +1209,7 @@ ul{ margin:0; padding:0; list-style:none; }
 .stat__num{
   display:block; font-family:var(--font-dsp); font-size:clamp(38px,5.4vw,60px); font-weight:600;
   letter-spacing:-.05em; line-height:1;
-  background:linear-gradient(160deg,#fff 10%,var(--green) 90%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
+  color:var(--green-lt);
   margin-bottom:10px;
 }
 .stat__lbl{ font-size:13.5px; color:var(--fg-3); letter-spacing:.01em; }
@@ -1267,11 +1261,7 @@ ul{ margin:0; padding:0; list-style:none; }
   font-family:var(--font-dsp); font-weight:600; letter-spacing:-.04em; line-height:1.06;
   font-size:clamp(32px,4.6vw,52px); margin:0 0 20px; text-wrap:balance;
 }
-.cta__title em{
-  font-style:normal;
-  background:linear-gradient(100deg,var(--green),var(--green-lt) 50%,var(--teal));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
+.cta__title em{ font-style:normal; color:var(--green-lt); }
 .cta__lead{ font-size:17px; color:var(--fg-2); margin:0 0 36px; max-width:46ch; }
 .cta__info{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
 .cta__line{
@@ -1366,14 +1356,6 @@ a.cta__line:hover .cta__lineVal{ color:var(--green); }
   display:inline-block; transform:translateY(105%); opacity:0;
   transition:transform .7s var(--ease), opacity .45s var(--ease);
 }
-/* Zvýrazněná (zelená) slova mají gradient přes background-clip:text.
-   Kdyby se písmena uvnitř posouvala, prohlížeč občas nepřekreslí ořez
-   a písmeno zůstane neviditelné — proto tady jen prolnutí, bez transformu. */
-[data-split] em .split__i{
-  transform:none; opacity:0;
-  transition:opacity .5s var(--ease);
-}
-[data-split].is-in em .split__i{ opacity:1; }
 [data-split].is-in .split__i{ transform:none; opacity:1; }
 /* Než JS rozloží nadpis na písmena, byl by chvíli vidět jako obyčejný text a pak
    zmizel. Bez JS (třída .js chybí) zůstane nadpis normálně viditelný. */

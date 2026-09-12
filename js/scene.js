@@ -21,12 +21,15 @@ function init () {
     canvas, antialias: false, alpha: true, powerPreference: 'high-performance'
   });
   renderer.setClearColor(0x000000, 0);
-  const dpr = () => Math.min(devicePixelRatio || 1, 2);
+  // na telefonu renderovat v plném DPR je zbytečně drahé — 1.5 vypadá stejně
+  const isSmall  = innerWidth < 820;
+  // na dotykových zařízeních šetříme výkon agresivněji než na desktopu
+  const lowPower = isSmall || matchMedia('(pointer:coarse)').matches;
+  const dpr = () => Math.min(devicePixelRatio || 1, isSmall ? 1.5 : 2);
   renderer.setPixelRatio(dpr());
   renderer.setSize(innerWidth, innerHeight, false);
 
-  const isSmall = innerWidth < 820;
-  const COUNT   = isSmall ? 2600 : 6200;
+  const COUNT = isSmall ? 1500 : 6200;
 
   /* ── geometry: sphere shell + inner haze + flat disc ────────── */
   const positions = new Float32Array(COUNT * 3);
@@ -206,6 +209,7 @@ function init () {
   });
 
   let visible = true;
+  let parked = false;
   document.addEventListener('visibilitychange', () => { visible = !document.hidden; });
 
   /* ── loop ───────────────────────────────────────────────────── */
@@ -214,6 +218,15 @@ function init () {
   function frame () {
     requestAnimationFrame(frame);
     if (!visible) return;
+
+    // Na mobilu scénu přestaneme kreslit, jakmile je hero pryč z obrazovky —
+    // předtím běžela pořád dokola až u patičky a ujídala výkon scrollování.
+    // Na desktopu ji necháváme běžet, tam dělá atmosféru i za dalšími sekcemi.
+    if (lowPower && scrollY > innerHeight * 1.3) {
+      if (!parked) { canvas.style.opacity = '0'; parked = true; }
+      return;
+    }
+    parked = false;
 
     const t = clock.getElapsedTime();
 

@@ -145,9 +145,9 @@ rozlišení, stačí přepsat soubory v `assets/apps/` a zvednout `--shot-w` v C
 | `pokis-1..3.webp` | Všechny nabídky · Kde koupit osobně (mapa) · Sledované obchody |
 | `theis-1..3.webp` | Celý provoz na jedné obrazovce · Všechna videa · Nahrání videa |
 | `icon-blaho/theis.webp` | ikony z App Storu (přes iTunes Search API) |
-| `icon-pokis.webp` | z `pokis-original.png` — POKIS v českém App Storu dohledat nešel |
+| `icon-pokis.webp` | ikona z App Storu (POKIS vyšel 11. 9. 2026) |
 
-Odkazy: Blaho & work a THEIS vedou do App Storu, POKIS na pokis.cz.
+Odkazy u všech tří aplikací vedou do App Storu.
 
 ## Mikro-scény v sekci „Co děláme“
 

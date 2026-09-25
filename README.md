@@ -85,9 +85,10 @@ vykreslují bíle přes CSS filtr `brightness(0) invert(1)`.
 |---|---|
 | `cot.svg` | olympijskytym.cz (varianta pro tmavý režim) |
 | `waca.svg` | waca.tetify.cz/logo.svg |
-| `fleysen.png` | fleysen.com (bílá horizontální varianta) |
+| `fleysen.webp` | fleysen.com (bílá horizontální varianta), zmenšeno na 280×92 WebP |
 | `theis.svg` | theis.cz/assets/theis-logo.svg |
-| `pokis.png` | z `AppIcon.png` — odmazané černé pozadí, ořez na glyf, 512×512 RGBA (originál zůstal jako `pokis-original.png`) |
+| `pokis.webp` | z `AppIcon.png` — odmazané černé pozadí, ořez na glyf, 128×128 WebP (originál zůstal jako `pokis-original.png`) |
+| `qeris.svg` | značka z qeris.cz/favicon.svg (dva zelené čtverce). Kolem malého čtverce je maskou vyříznutá mezera, jinak by po bílém CSS filtru oba čtverce splynuly v jeden tvar |
 | `honzabartos.svg` | honzabartos.cz (inline SVG z hlavičky) |
 
 | `glowly.svg` | dodáno klientem (bílá varianta); `viewBox` oříznutý na kresbu — původně měla kolem sebe ~40 % prázdného plátna. V HTML je `?v=2`, protože obrázky se cachují 30 dní |
@@ -121,6 +122,7 @@ ne v barvách Tetify. Barvy, fonty a prvky UI jsou převzaté přímo z jejich w
 | Fleysen | `#fff` | `#171717`, `#8cac89`, `#f1ba00` | Raptor Text² |
 | Theis | `#f9f6f3` | `#0a7550` | Familjen Grotesk + JetBrains Mono |
 | Pokis | `#0a0a0b` | `#f2c94c`, `#34d399` | Inter |
+| Qeris | `#f5f5f7`, text `#1d1d1f` | graf `#3fc722`, „Živě" `#249c0e`, šedá `#86868b` | systémový (SF Pro) |
 
 ¹ Blaho používá komerční „Fields Display", nahrazeno DM Serif Display z Google Fonts.
 ² Raptor Text je komerční, nahrazeno Inter Tight.
@@ -128,7 +130,11 @@ ne v barvách Tetify. Barvy, fonty a prvky UI jsou převzaté přímo z jejich w
 Všechno je čisté HTML/CSS (žádné screenshoty), takže je to ostré na každém displeji
 a animuje se to: mockup se rozehraje, když karta dostane `.is-in`. Styly jsou v bloku
 `MOCKUPY PROJEKTŮ` v `css/style.css`, každý projekt má vlastní prefix (`.mcov`, `.monb`,
-`.mpod`, `.mwaca`, `.mfley`, `.mblaho`, `.mtheis`, `.mpokis`).
+`.mpod`, `.mwaca`, `.mfley`, `.mblaho`, `.mtheis`, `.mpokis`, `.mqeris`).
+
+V Produktech jsou tři produkty vedle sebe a karta „váš produkt" je pod nimi přes celou
+šířku jako pruh (`@media (min-width:1081px)` u `.product--cta`). Pod 1080 px jsou
+dva sloupce a karta je zase normální, takže vychází mřížka 2 × 2.
 
 Data v mockupech jsou ilustrační — žádné skutečné tikety, dokumenty ani uživatelé.
 
@@ -168,6 +174,38 @@ i v klidovém stavu — jinak je tam prázdná díra (na to jsem narazil u `.s7`
 
 Porovnání směrů, ze kterých se vybíralo, zůstalo v `navrhy-widgetu.html`
 (http://localhost:4321/navrhy-widgetu.html) — z nasazení je vyloučené.
+
+## Výkon
+
+Výchozí stav podle PageSpeed Insights (15. 9. 2026): **mobil 39, desktop 89**.
+Po prvním kole úprav mobil **78**. Druhé kolo (hvězdy v CSS, content-visibility)
+zvedlo lokální Lighthouse na mobilu z mediánu **85 na 99** (3 běhy na verzi,
+zahřátá CDN) a LCP z 4,3 s na 1,7 s. Hlavní příčiny a co s nimi je:
+
+| Problém | Řešení |
+|---|---|
+| Jeden blokující stylesheet se 7 fonty (mobil: −4 s) | Základní fonty (Inter Tight, Inter, JetBrains Mono) se načítají neblokujícně. Fonty pro mockupy klientů (DM Sans, Poppins, Familjen Grotesk, DM Serif Display) dotahuje `initLazyFonts()` v `main.js` až při scrollu k Produktům. |
+| Hero čekal na JS a fonty (LCP 6,6 s) | Nadpis je rozložený na písmena rovnou v HTML a hero se animuje v CSS od prvního vykreslení (`.hero-in`, `heroLetter`). Animace začíná na `opacity:.01`, protože prvek s nulovou průhledností se do LCP nepočítá. |
+| three.js na telefonu (39 s práce hlavního vlákna) | `scene.js` na dotyku a pod 820 px three.js vůbec nestahuje — hero má místo scény statické hvězdné pozadí. Na desktopu se scéna spouští až po načtení stránky a z minifikovaného buildu (166 kB místo 257 kB). |
+| Obrázky (−273 KiB) | `pokis.png` měl 258 kB pro 34px logo → `pokis.webp` 6 kB; `fleysen.png` → `fleysen.webp`. Všechny `<img>` mají `width`/`height`. |
+| Nekonečné animace mimo obrazovku | `initAnimPause()` jim přidá `.anim-off` (pozastaví je), když nejsou vidět. |
+| Hvězdné pozadí posouvalo LCP na 4,3 s | Chrome ho bere jako největší prvek, ale zapínal ho až JS třídou `.no-webgl`. Teď je řešené media query (stejná podmínka jako v `scene.js`) a SVG je vložené přímo v CSS (`--hero-stars`) — vykreslí se v prvním snímku. |
+| Rozvržení celé stránky před prvním snímkem | Sekce pod ohybem mají `content-visibility:auto`, prohlížeč je počítá až při přiblížení. Odhad výšky dává `contain-intrinsic-size`. Protože s odhadem by skok z menu minul cíl, `main.js` před skokem přidá `.cv-off` a úsporu vypne. |
+| 260 prvků v jednom SVG | Čárky pozadí ČOV sloučené do 15 cest (podle barvy a průhlednosti), DOM o 244 prvků menší. |
+| Logo Tetify 485×207 PNG na 104 px | `logotet.webp` 224×96. Původní PNG zůstává kvůli `og:image`. |
+| PageSpeed pořád 77 (FCP 3,9 s), i když lokálně 99 | Lighthouse počítá FCP jako průměr dvou odhadů. Do pesimistického spadne všechno, co se *začalo stahovat* před prvním vykreslením. Na rychlém stroji fonty začaly až po něm, na serverech PageSpeed před ním: ~300 kB přes 2 cizí domény na pomalém 4G. Webové fonty teď načítá `initFonts()` v `main.js` až po `load` + dvou `requestAnimationFrame`, takže vždy až po prvním snímku. Stejně tak fonty mockupů. Obrázky pod ohybem mají `loading="lazy"`. |
+| Přepnutí systémového fontu na Inter by posunulo text | `@font-face` `Inter Fallback` a `Inter Tight Fallback` na začátku `style.css`: Arial/Roboto se `size-adjust` a `ascent/descent-override` spočítanými z metrik Interu (fontTools, český text). CLS 0,002. |
+
+| PageSpeed desktop 69 (TBT 1,9 s, 15 dlouhých úloh) | three.js se spouštěl sám po načtení a pak renderoval v každém snímku; na pomalém PC bez GPU to jsou dlouhé úlohy. `scene.js` teď three.js stáhne až první interakcí (myš, scroll, klávesa) a renderer má `failIfMajorPerformanceCaveat` — při softwarovém WebGL se scéna nespustí vůbec. Do té doby jsou v hero statické hvězdy i na desktopu, se startem scény se prolnou pryč (`.webgl-ready`). Kurzor v `main.js` už nepřekresluje v každém snímku, smyčka běží jen při pohybu myši. |
+
+Třetí kolo (fonty po prvním vykreslení): mobil **99 / 100 / 100**, FCP 1,0 s, a to i v běhu,
+kde první vykreslení přišlo až po 1,7 s. Desktop 100.
+
+Čtvrté kolo (desktop, three.js až po interakci): Lighthouse desktop se 4× zpomaleným CPU
+a softwarovým WebGL — před úpravou 4,4 s práce hlavního vlákna, po ní **0,4 s, TBT 0 ms, skóre 98**.
+
+Co zůstává: „nepoužívaný JavaScript" (three.js na desktopu — bez bundleru se nedá
+ořezat) a minifikace vlastního CSS/JS (jednotky kB, projekt záměrně nemá build).
 
 ## Barvy
 

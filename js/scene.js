@@ -3,12 +3,33 @@
    Particle field + wireframe core, scroll & pointer driven
    ═══════════════════════════════════════════════════════ */
 
-import * as THREE from 'three';
+/* three.js se na slabších zařízeních vůbec nestahuje (~250 kB JS + práce GPU) —
+   místo scény je tam statické hvězdné pozadí v CSS (.no-webgl). Na desktopu se
+   scéna spouští až po načtení stránky, aby nebrzdila první vykreslení. */
+let THREE;
+const canvas   = document.getElementById('webgl');
+const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lowPower = innerWidth < 820 || matchMedia('(pointer:coarse)').matches;
 
-const canvas = document.getElementById('webgl');
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if (canvas) init();
+if (canvas && lowPower) {
+  document.documentElement.classList.add('no-webgl');
+} else if (canvas) {
+  // Na desktopu se scéna spouští až první interakcí (myš, scroll, klávesa). Stažení
+  // three.js, kompilace shaderů i každý snímek jdou přes hlavní vlákno — na pomalém PC
+  // bez GPU (tak měří i PageSpeed) to dělalo TBT 1,9 s. Do té doby je v hero statické
+  // hvězdné pozadí, které se se startem scény prolne pryč (.webgl-ready).
+  const events = ['pointermove', 'pointerdown', 'wheel', 'scroll', 'keydown', 'touchstart'];
+  let started = false;
+  const go = () => {
+    if (started) return;
+    started = true;
+    events.forEach((ev) => removeEventListener(ev, go));
+    import('three')
+      .then((mod) => { THREE = mod; init(); })
+      .catch(() => document.documentElement.classList.add('no-webgl'));
+  };
+  events.forEach((ev) => addEventListener(ev, go, { passive: true }));
+}
 
 function init () {
   const scene  = new THREE.Scene();
@@ -17,19 +38,18 @@ function init () {
   const camera = new THREE.PerspectiveCamera(52, innerWidth / innerHeight, 0.1, 100);
   camera.position.set(0, 0, 7.2);
 
+  // bez hardwarové grafiky (softwarové WebGL) se kontext nevytvoří a zůstanou statické hvězdy
   const renderer = new THREE.WebGLRenderer({
-    canvas, antialias: false, alpha: true, powerPreference: 'high-performance'
+    canvas, antialias: false, alpha: true, powerPreference: 'high-performance',
+    failIfMajorPerformanceCaveat: true
   });
   renderer.setClearColor(0x000000, 0);
-  // na telefonu renderovat v plném DPR je zbytečně drahé — 1.5 vypadá stejně
-  const isSmall  = innerWidth < 820;
-  // na dotykových zařízeních šetříme výkon agresivněji než na desktopu
-  const lowPower = isSmall || matchMedia('(pointer:coarse)').matches;
-  const dpr = () => Math.min(devicePixelRatio || 1, isSmall ? 1.5 : 2);
+  const dpr = () => Math.min(devicePixelRatio || 1, 2);
+  canvas.style.opacity = '0';   // první snímek se plynule prolne (CSS transition)
   renderer.setPixelRatio(dpr());
   renderer.setSize(innerWidth, innerHeight, false);
 
-  const COUNT = isSmall ? 1500 : 6200;
+  const COUNT = 6200;
 
   /* ── geometry: sphere shell + inner haze + flat disc ────────── */
   const positions = new Float32Array(COUNT * 3);
@@ -77,7 +97,7 @@ function init () {
 
   const uniforms = {
     uTime:    { value: 0 },
-    uSize:    { value: isSmall ? 26 : 34 },
+    uSize:    { value: 34 },
     uScroll:  { value: 0 },
     uPointer: { value: new THREE.Vector2(0, 0) },
     uDpr:     { value: dpr() },
@@ -209,7 +229,6 @@ function init () {
   });
 
   let visible = true;
-  let parked = false;
   document.addEventListener('visibilitychange', () => { visible = !document.hidden; });
 
   /* ── loop ───────────────────────────────────────────────────── */
@@ -219,14 +238,6 @@ function init () {
     requestAnimationFrame(frame);
     if (!visible) return;
 
-    // Na mobilu scénu přestaneme kreslit, jakmile je hero pryč z obrazovky —
-    // předtím běžela pořád dokola až u patičky a ujídala výkon scrollování.
-    // Na desktopu ji necháváme běžet, tam dělá atmosféru i za dalšími sekcemi.
-    if (lowPower && scrollY > innerHeight * 1.3) {
-      if (!parked) { canvas.style.opacity = '0'; parked = true; }
-      return;
-    }
-    parked = false;
 
     const t = clock.getElapsedTime();
 

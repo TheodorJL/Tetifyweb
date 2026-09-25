@@ -141,11 +141,20 @@
     if (!cur || matchMedia('(hover:none)').matches || reduced) return;
 
     var dot = $('.cursor__dot', cur), ring = $('.cursor__ring', cur);
-    var mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+    var mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, raf = null;
+
+    // smyčka běží jen, dokud kroužek dohání myš — v klidu nic nepočítá
+    function loop () {
+      rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
+      dot.style.transform  = 'translate(' + mx + 'px,' + my + 'px)';
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
+      raf = (Math.abs(rx - mx) > 0.1 || Math.abs(ry - my) > 0.1) ? requestAnimationFrame(loop) : null;
+    }
 
     addEventListener('pointermove', function (e) {
       mx = e.clientX; my = e.clientY;
       cur.classList.add('is-on');
+      if (!raf) raf = requestAnimationFrame(loop);
     }, { passive: true });
 
     addEventListener('pointerdown', function () { cur.classList.add('is-hover'); });
@@ -156,13 +165,6 @@
       el.addEventListener('pointerenter', function () { cur.classList.add('is-hover'); });
       el.addEventListener('pointerleave', function () { cur.classList.remove('is-hover'); });
     });
-
-    (function loop () {
-      rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
-      dot.style.transform  = 'translate(' + mx + 'px,' + my + 'px)';
-      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
-      requestAnimationFrame(loop);
-    })();
   }
 
   /* ─── MAGNETIC BUTTONS ──────────────────────────────── */
@@ -354,7 +356,11 @@
     // otevření rovnou s #kotvou v adrese
     if (location.hash.length > 1) {
       var target = $(location.hash);
-      if (target) setTimeout(function () { revealNow(target); }, 60);
+      if (target) setTimeout(function () {
+        document.documentElement.classList.add('cv-off');
+        revealNow(target);
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 74, behavior: 'instant' });
+      }, 60);
     }
 
     // smooth anchors with header offset
@@ -366,10 +372,77 @@
         if (!t) return;
         e.preventDefault();
         revealNow(t);
+        // sekce pod ohybem mají content-visibility:auto a jen odhadnutou výšku —
+        // před výpočtem cíle je necháme vykreslit, jinak by skok minul
+        document.documentElement.classList.add('cv-off');
         var top = t.getBoundingClientRect().top + window.pageYOffset - 74;
         window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
       });
     });
+  }
+
+  /* ─── WEBOVÉ FONTY AŽ PO PRVNÍM VYKRESLENÍ ─────────── */
+  // ~300 kB fontů se dřív začalo stahovat ještě před prvním snímkem a PageSpeed je
+  // na pomalém mobilu započítal do FCP. Text se teď nejdřív vykreslí systémovým
+  // fontem (s upravenými rozměry, viz CSS) a Inter se dotáhne hned potom.
+  // Dvojitý requestAnimationFrame po načtení zaručuje, že první snímek už proběhl.
+  function afterFirstPaint (fn) {
+    var go = function () {
+      requestAnimationFrame(function () { requestAnimationFrame(fn); });
+    };
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go, { once: true });
+  }
+
+  function initFonts () {
+    var href = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700' +
+      '&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap';
+    var inject = function () {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = href;
+      document.head.appendChild(l);
+    };
+    afterFirstPaint(inject);
+  }
+
+  /* ─── FONTY MOCKUPŮ (LÍNĚ) ──────────────────────────── */
+  // Fonty klientů (DM Sans, Poppins, Familjen Grotesk…) potřebují jen mockupy níž
+  // na stránce. Stáhnou se, až se k nim uživatel blíží — ne při prvním načtení.
+  function initLazyFonts () {
+    var href = 'https://fonts.googleapis.com/css2?family=Inter:wght@700;800' +
+      '&family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Familjen+Grotesk:wght@500;600' +
+      '&family=Poppins:wght@500;600;800&family=DM+Serif+Display&display=swap';
+    var done = false;
+    var load = function () {
+      if (done) return;
+      done = true;
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = href;
+      document.head.appendChild(l);
+    };
+    // i fonty mockupů až po prvním snímku — sekce jsou do 1200 px, takže by na mobilu
+    // mohly začít stahovat hned při načtení
+    afterFirstPaint(function () {
+      var targets = $$('#produkty, #prace, #aplikace');
+      if (!targets.length || !('IntersectionObserver' in window)) { load(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) { load(); io.disconnect(); }
+      }, { rootMargin: '1200px 0px' });
+      targets.forEach(function (t) { io.observe(t); });
+    });
+  }
+
+  /* ─── NEKONEČNÉ ANIMACE JEN VE VÝHLEDU ──────────────── */
+  // Prstence, dýchání částic, blikání signálu… běží dokola. Mimo obrazovku je
+  // pozastavíme, ať nežerou výkon, když se na ně nikdo nedívá.
+  function initAnimPause () {
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.classList.toggle('anim-off', !e.isIntersecting); });
+    }, { rootMargin: '200px 0px' });
+    $$('.marquee, #sluzby, #produkty, #prace, #aplikace').forEach(function (el) { io.observe(el); });
   }
 
   /* ─── BOOT ──────────────────────────────────────────── */
@@ -384,6 +457,7 @@
   }
 
   function early () {
+    initFonts();
     initScrollUI();
     initMenu();
     initCursor();
@@ -392,6 +466,8 @@
     initFaq();
     initForm();
     initMisc();
+    initLazyFonts();
+    initAnimPause();
   }
 
   function start () {

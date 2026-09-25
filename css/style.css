@@ -2,6 +2,20 @@
    TETIFY — design system
    ═══════════════════════════════════════════════════════ */
 
+/* Náhradní fonty: Arial/Roboto s rozměry přepočtenými na Inter a Inter Tight.
+   Webové fonty se stahují až po prvním vykreslení (main.js), a když se text přepne
+   ze systémového fontu na Inter, díky těmto hodnotám se nic neposune. */
+@font-face{
+  font-family:'Inter Fallback';
+  src:local('Arial'), local('ArialMT'), local('Helvetica'), local('Roboto'), local('Roboto-Regular');
+  size-adjust:102.23%; ascent-override:94.77%; descent-override:23.6%; line-gap-override:0%;
+}
+@font-face{
+  font-family:'Inter Tight Fallback';
+  src:local('Arial'), local('ArialMT'), local('Helvetica'), local('Roboto'), local('Roboto-Regular');
+  size-adjust:97.34%; ascent-override:99.52%; descent-override:24.78%; line-gap-override:0%;
+}
+
 :root{
   /* brand */
   --green:      #00e07a;
@@ -22,8 +36,8 @@
   --fg-2:       #a9bdb3;
   --fg-3:       #6e837a;
 
-  --font:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-dsp:   'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font:       'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-dsp:   'Inter Tight', 'Inter Tight Fallback', 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* motion */
@@ -58,7 +72,10 @@ body{
 }
 body.is-locked{ overflow:hidden; }
 
-img{ max-width:100%; display:block; }
+/* height:auto je nutné, protože obrázky mají v HTML width/height (kvůli rezervaci
+   místa). Bez něj by u pravidel, která nastavují jen šířku, zůstala výška
+   z atributu a obrázek by se roztáhl. */
+img{ max-width:100%; height:auto; display:block; }
 a{ color:inherit; text-decoration:none; }
 button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
 ul{ margin:0; padding:0; list-style:none; }
@@ -596,6 +613,18 @@ ul{ margin:0; padding:0; list-style:none; }
 .product:hover .product__foot svg{ transform:translate(3px,-3px); }
 .product--cta{ background:linear-gradient(165deg,rgba(0,224,122,.1),rgba(255,255,255,.02)); border-color:rgba(0,224,122,.2); }
 .product--cta .btn{ margin-top:24px; align-self:flex-start; }
+/* Tři produkty vedle sebe, „váš produkt" pod nimi přes celou šířku jako pruh.
+   Pod 1080 px jsou dva sloupce a karta je zase normální (2 + 2). */
+@media (min-width:1081px){
+  .product--cta{
+    grid-column:1/-1; min-height:0; display:grid; align-items:center;
+    grid-template-columns:240px auto minmax(0,1fr) auto; column-gap:36px; padding-block:24px;
+  }
+  .product--cta .product__shot{ height:auto; min-height:118px; align-self:stretch; margin:-25px 0 -25px -29px; border-bottom:0; border-right:1px solid var(--line); }
+  .product--cta .product__top{ margin:0; }
+  .product--cta .product__text{ margin:0; max-width:50ch; }
+  .product--cta .btn{ margin:0; }
+}
 
 /* ═══ CLIENT LOGOS ═══ */
 .cl{
@@ -604,8 +633,8 @@ ul{ margin:0; padding:0; list-style:none; }
   transition:opacity .4s var(--ease), transform .5s var(--ease), filter .4s;
 }
 .cl:hover{ opacity:1; transform:translateY(-3px); }
-/* Na úzkém displeji se 7 log nevejde na řádek a poslední zůstávalo osamocené.
-   Tenhle prvek je jinak neviditelný a na mobilu rozdělí řadu na 4 + 3. */
+/* Na úzkém displeji se 8 log nevejde na řádek a zalamovalo se nahodile.
+   Tenhle prvek je jinak neviditelný a na mobilu rozdělí řadu na 4 + 4. */
 .cl-br{ display:none; }
 .cl--cot{ height:38px; }
 .cl--waca{ height:40px; }
@@ -614,6 +643,7 @@ ul{ margin:0; padding:0; list-style:none; }
 .cl--pokis{ height:34px; }
 .cl--blaho{ height:24px; }
 .cl--glowly{ height:25px; }
+.cl--qeris{ height:29px; }
 
 /* ═══ CASE STUDIES ═══ */
 .cases{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
@@ -1051,6 +1081,68 @@ ul{ margin:0; padding:0; list-style:none; }
 .mpokis__row u.is-low{ background:#f59e0b; }
 .mpokis__row strong{ font-size:10px; font-weight:700; color:#f2c94c; }
 
+/* ── Qeris · QR kódy a statistiky (světle šedá, SF Pro, zelená) ──
+   Barvy z qeris.cz: pozadí #f5f5f7, text #1d1d1f, šedá #86868b, graf #3fc722,
+   „Živě" #249c0e. Po zobrazení se dokreslí graf, přijede nový sken a počítadlo
+   skenů se přetočí o jedna a zezelená — stejně jako na jejich webu. */
+.mqeris{
+  display:flex; flex-direction:column; padding:12px 12px 0;
+  background:
+    radial-gradient(55% 75% at 12% 0%,rgba(19,183,124,.18),transparent 70%),
+    radial-gradient(50% 70% at 96% 18%,rgba(0,122,255,.1),transparent 70%),
+    #f5f5f7;
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  color:#1d1d1f; line-height:1.25; letter-spacing:normal;
+}
+.mqeris__win{ flex:1; min-height:0; display:flex; flex-direction:column; background:#fff; border:1px solid rgba(0,0,0,.06); border-bottom:0; border-radius:11px 11px 0 0; overflow:hidden; box-shadow:0 12px 30px -16px rgba(0,0,0,.3); }
+.mqeris__bar{ position:relative; display:flex; align-items:center; gap:4px; padding:6px 9px; border-bottom:1px solid #f0f0f2; }
+.mqeris__bar i{ width:6px; height:6px; border-radius:50%; background:#ff5f57; }
+.mqeris__bar i:nth-child(2){ background:#febc2e; }
+.mqeris__bar i:nth-child(3){ background:#28c840; }
+.mqeris__bar span{ position:absolute; left:50%; transform:translateX(-50%); width:36%; padding:1px 0; border-radius:5px; background:#f5f5f7; text-align:center; font-size:7.5px; color:#86868b; }
+.mqeris__app{ flex:1; min-height:0; display:grid; grid-template-columns:62px minmax(0,1fr); }
+.mqeris__side{ display:flex; flex-direction:column; gap:1px; padding:7px 5px; border-right:1px solid #f0f0f2; }
+.mqeris__logo{ display:flex; align-items:center; gap:4px; padding:0 5px 6px; font-size:10px; font-weight:700; letter-spacing:-.03em; }
+.mqeris__logo img{ width:10px; height:10px; }
+.mqeris__side > span:not(.mqeris__logo){ padding:3px 5px; border-radius:5px; font-size:7.5px; font-weight:500; color:#48484a; white-space:nowrap; }
+.mqeris__side .is-on{ background:#f2f2f7; color:#1d1d1f; font-weight:600; }
+.mqeris__main{ display:flex; flex-direction:column; gap:6px; min-width:0; padding:8px 9px 0; background:#f5f5f7; }
+.mqeris__hd{ display:flex; align-items:center; justify-content:space-between; gap:6px; }
+.mqeris__hd b{ font-size:11.5px; font-weight:700; letter-spacing:-.02em; }
+.mqeris__seg{ display:flex; padding:1.5px; border-radius:6px; background:#e8e8ed; }
+.mqeris__seg i{ padding:2px 5px; border-radius:4.5px; font-style:normal; font-size:6.5px; font-weight:600; color:#86868b; }
+.mqeris__seg .is-on{ background:#fff; color:#1d1d1f; box-shadow:0 1px 2px rgba(0,0,0,.08); }
+.mqeris__stats{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }
+.mqeris__stat{ min-width:0; padding:5px 7px 6px; border-radius:8px; background:#fff; border:1px solid rgba(0,0,0,.04); }
+.mqeris__stat em{ display:block; font-style:normal; font-size:6.8px; color:#86868b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mqeris__stat b{ display:block; margin-top:2px; font-size:13px; font-weight:700; line-height:1.2; letter-spacing:-.02em; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mqeris__count{ transition:color .4s 1.35s; }
+.mqeris__count s{ display:inline-block; height:1.2em; overflow:hidden; vertical-align:top; text-decoration:none; }
+.mqeris__count u{ display:block; height:1.2em; text-decoration:none; transition:transform .6s cubic-bezier(.16,1,.3,1) 1.3s; }
+.is-in .mqeris__count{ color:#249c0e; }
+.is-in .mqeris__count u{ transform:translateY(-100%); }
+.mqeris__chart{ flex:1; min-height:0; display:flex; flex-direction:column; padding:6px 7px 0; border-radius:8px 8px 0 0; background:#fff; border:1px solid rgba(0,0,0,.04); border-bottom:0; }
+.mqeris__chart em{ font-style:normal; font-size:7.5px; font-weight:700; }
+.mqeris__chart svg{ display:block; flex:1; min-height:0; width:100%; margin-top:4px; overflow:visible; }
+.mqeris__area{ opacity:0; transition:opacity .8s .9s; }
+.mqeris__line{ fill:none; stroke:#3fc722; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.6s cubic-bezier(.65,0,.35,1) .3s; }
+.is-in .mqeris__area{ opacity:1; }
+.is-in .mqeris__line{ stroke-dashoffset:0; }
+.mqeris__live{
+  position:absolute; right:10px; bottom:10px; z-index:2; width:min(64%,196px);
+  display:flex; align-items:center; gap:7px; padding:7px 9px; border-radius:11px;
+  background:rgba(255,255,255,.97); border:1px solid rgba(0,0,0,.05); box-shadow:0 14px 30px -10px rgba(0,0,0,.3);
+  opacity:0; transform:translateY(14px); transition:opacity .5s .9s, transform .7s cubic-bezier(.16,1,.3,1) .9s;
+}
+.is-in .mqeris__live{ opacity:1; transform:none; }
+.mqeris__pill{ flex:0 0 auto; display:flex; align-items:center; gap:3px; padding:2px 6px; border-radius:99px; background:rgba(63,199,34,.12); color:#249c0e; font-size:7px; font-weight:700; }
+.mqeris__pill i{ width:4px; height:4px; border-radius:50%; background:#3fc722; animation:mqerisPulse 1.6s ease-in-out infinite; }
+@keyframes mqerisPulse{ 50%{ opacity:.3; } }
+.mqeris__lt{ flex:1; min-width:0; }
+.mqeris__lt b{ display:block; font-size:8.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mqeris__lt em{ display:block; font-style:normal; font-size:7px; color:#86868b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mqeris__live time{ flex:0 0 auto; font-size:7px; color:#86868b; }
+
 /* ── „Váš produkt" · prázdné okno čekající na obsah ── */
 .myour{ display:grid; place-items:center; background:radial-gradient(120% 100% at 50% 0%,rgba(0,224,122,.1),transparent 70%); }
 .myour__frame{ width:76%; height:68%; border-radius:12px; border:1.5px dashed rgba(0,224,122,.35); display:flex; flex-direction:column; overflow:hidden; transition:border-color .5s, background .5s; }
@@ -1327,7 +1419,7 @@ a.cta__line:hover .cta__lineVal{ color:var(--green); }
 .footer__logo{ width:112px; filter:brightness(0) invert(1); margin-bottom:18px; }
 .footer__brand p{ font-size:14.5px; color:var(--fg-3); margin:0; max-width:34ch; }
 .footer__cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
-.footer__col h4{ font-size:12px; font-family:var(--font-mono); letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3); margin:0 0 15px; font-weight:400; }
+.footer__col h3{ font-size:12px; font-family:var(--font-mono); letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3); margin:0 0 15px; font-weight:400; }
 .footer__col a{ display:block; font-size:14.5px; color:var(--fg-2); padding:5px 0; transition:color .3s, transform .35s var(--ease); }
 .footer__col a:hover{ color:var(--green); transform:translateX(4px); }
 .footer__legal{
@@ -1359,9 +1451,52 @@ a.cta__line:hover .cta__lineVal{ color:var(--green); }
 [data-split].is-in .split__i{ transform:none; opacity:1; }
 /* Než JS rozloží nadpis na písmena, byl by chvíli vidět jako obyčejný text a pak
    zmizel. Bez JS (třída .js chybí) zůstane nadpis normálně viditelný. */
-.js [data-split]:not([data-done]){ opacity:0; animation:splitFallback 0s 2s forwards; }
+.js [data-split]:not([data-done]){ opacity:0; animation:splitFallback 1ms 2s forwards; }
 /* pojistka: kdyby se main.js nenačetl (chyba, stará cache), nadpis se po 2 s ukáže sám */
 @keyframes splitFallback{ to{ opacity:1; } }
+
+/* ═══ HERO BEZ ČEKÁNÍ NA JS ═══
+   Hero se animuje čistě v CSS od prvního vykreslení. Dřív čekal, až se spustí JS
+   a načtou fonty, takže nadpis naskočil až po několika sekundách (LCP 6,6 s).
+   Animace začíná na opacity .01, ne 0: neviditelný prvek se do LCP nezapočítá. */
+.hero__title .split__i{ animation:heroLetter .7s var(--ease) both; }
+@keyframes heroLetter{ from{ transform:translateY(105%); opacity:.01; } to{ transform:none; opacity:1; } }
+.hero-in{ animation:heroUp .9s var(--ease) both; animation-delay:var(--hd,0ms); }
+@keyframes heroUp{ from{ transform:translateY(26px); opacity:.01; } to{ transform:none; opacity:1; } }
+
+/* ═══ BEZ 3D SCÉNY (mobil, dotyk) ═══
+   Na slabších zařízeních se three.js vůbec nestahuje a hero má místo scény
+   statické hvězdné pozadí. Podmínka je stejná jako v scene.js (šířka < 820 px
+   nebo dotyk), ale řešená media query, takže hvězdy jsou součástí úplně prvního
+   vykreslení. Dřív je zapínal až JS třídou .no-webgl a pozadí — jako největší
+   prvek na obrazovce — posouvalo LCP. Obrázek je vložený přímo v CSS, aby nečekal
+   na další požadavek. Na desktopu jsou hvězdy vidět taky, dokud se 3D scéna
+   nespustí (startuje až první interakcí), a pak se prolnou pryč (.webgl-ready). */
+:root{
+  --hero-stars:
+    radial-gradient(70% 45% at 50% 40%, rgba(0,224,122,.14), transparent 70%),
+    url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice"%3E%3Ccircle cx="256" cy="20" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.4"/%3E%3Ccircle cx="295" cy="541" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.3"/%3E%3Ccircle cx="13" cy="75" r="0.8" fill="rgb%28124,255,190%29" fill-opacity="0.55"/%3E%3Ccircle cx="224" cy="573" r="1.5" fill="rgb%280,224,122%29" fill-opacity="0.58"/%3E%3Ccircle cx="180" cy="223" r="0.7" fill="rgb%280,224,122%29" fill-opacity="0.71"/%3E%3Ccircle cx="279" cy="272" r="0.8" fill="rgb%280,216,194%29" fill-opacity="0.38"/%3E%3Ccircle cx="41" cy="304" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.76"/%3E%3Ccircle cx="323" cy="584" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.32"/%3E%3Ccircle cx="32" cy="235" r="1.5" fill="rgb%280,216,194%29" fill-opacity="0.62"/%3E%3Ccircle cx="231" cy="564" r="0.7" fill="rgb%280,216,194%29" fill-opacity="0.65"/%3E%3Ccircle cx="394" cy="684" r="0.7" fill="rgb%28233,242,237%29" fill-opacity="0.48"/%3E%3Ccircle cx="254" cy="292" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.46"/%3E%3Ccircle cx="281" cy="547" r="0.7" fill="rgb%280,224,122%29" fill-opacity="0.62"/%3E%3Ccircle cx="214" cy="196" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.48"/%3E%3Ccircle cx="274" cy="674" r="0.7" fill="rgb%28124,255,190%29" fill-opacity="0.39"/%3E%3Ccircle cx="322" cy="321" r="0.7" fill="rgb%280,216,194%29" fill-opacity="0.38"/%3E%3Ccircle cx="85" cy="399" r="1.5" fill="rgb%280,216,194%29" fill-opacity="0.53"/%3E%3Ccircle cx="56" cy="596" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.41"/%3E%3Ccircle cx="359" cy="320" r="0.8" fill="rgb%280,224,122%29" fill-opacity="0.85"/%3E%3Ccircle cx="204" cy="73" r="0.7" fill="rgb%280,224,122%29" fill-opacity="0.77"/%3E%3Ccircle cx="251" cy="634" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.61"/%3E%3Ccircle cx="153" cy="797" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.4"/%3E%3Ccircle cx="272" cy="92" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.7"/%3E%3Ccircle cx="45" cy="348" r="1.0" fill="rgb%280,216,194%29" fill-opacity="0.25"/%3E%3Ccircle cx="389" cy="610" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.8"/%3E%3Ccircle cx="337" cy="406" r="0.8" fill="rgb%280,224,122%29" fill-opacity="0.34"/%3E%3Ccircle cx="216" cy="623" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.8"/%3E%3Ccircle cx="195" cy="89" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.78"/%3E%3Ccircle cx="96" cy="193" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.82"/%3E%3Ccircle cx="293" cy="653" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.71"/%3E%3Ccircle cx="264" cy="757" r="0.8" fill="rgb%28233,242,237%29" fill-opacity="0.41"/%3E%3Ccircle cx="386" cy="743" r="1.5" fill="rgb%280,216,194%29" fill-opacity="0.66"/%3E%3Ccircle cx="160" cy="537" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.51"/%3E%3Ccircle cx="48" cy="180" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.26"/%3E%3Ccircle cx="235" cy="6" r="1.5" fill="rgb%280,224,122%29" fill-opacity="0.63"/%3E%3Ccircle cx="27" cy="25" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.29"/%3E%3Ccircle cx="111" cy="388" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.33"/%3E%3Ccircle cx="97" cy="378" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.36"/%3E%3Ccircle cx="264" cy="283" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.53"/%3E%3Ccircle cx="269" cy="787" r="0.7" fill="rgb%280,216,194%29" fill-opacity="0.29"/%3E%3Ccircle cx="320" cy="87" r="0.8" fill="rgb%28233,242,237%29" fill-opacity="0.36"/%3E%3Ccircle cx="56" cy="147" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.4"/%3E%3Ccircle cx="177" cy="689" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.31"/%3E%3Ccircle cx="388" cy="741" r="0.8" fill="rgb%28233,242,237%29" fill-opacity="0.35"/%3E%3Ccircle cx="193" cy="692" r="0.7" fill="rgb%28124,255,190%29" fill-opacity="0.35"/%3E%3Ccircle cx="394" cy="212" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.42"/%3E%3Ccircle cx="62" cy="237" r="0.7" fill="rgb%28124,255,190%29" fill-opacity="0.6"/%3E%3Ccircle cx="299" cy="46" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.54"/%3E%3Ccircle cx="23" cy="406" r="0.8" fill="rgb%28124,255,190%29" fill-opacity="0.29"/%3E%3Ccircle cx="270" cy="188" r="0.7" fill="rgb%280,224,122%29" fill-opacity="0.81"/%3E%3Ccircle cx="232" cy="32" r="0.7" fill="rgb%280,216,194%29" fill-opacity="0.5"/%3E%3Ccircle cx="374" cy="163" r="1.5" fill="rgb%280,216,194%29" fill-opacity="0.44"/%3E%3Ccircle cx="158" cy="537" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.52"/%3E%3Ccircle cx="4" cy="497" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.85"/%3E%3Ccircle cx="215" cy="405" r="0.8" fill="rgb%28124,255,190%29" fill-opacity="0.81"/%3E%3Ccircle cx="352" cy="296" r="0.8" fill="rgb%280,216,194%29" fill-opacity="0.51"/%3E%3Ccircle cx="245" cy="790" r="1.5" fill="rgb%280,216,194%29" fill-opacity="0.57"/%3E%3Ccircle cx="373" cy="83" r="0.8" fill="rgb%28124,255,190%29" fill-opacity="0.41"/%3E%3Ccircle cx="297" cy="124" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.61"/%3E%3Ccircle cx="81" cy="507" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.55"/%3E%3Ccircle cx="362" cy="677" r="0.7" fill="rgb%280,216,194%29" fill-opacity="0.63"/%3E%3Ccircle cx="18" cy="267" r="0.8" fill="rgb%280,216,194%29" fill-opacity="0.63"/%3E%3Ccircle cx="65" cy="353" r="1.5" fill="rgb%28124,255,190%29" fill-opacity="0.51"/%3E%3Ccircle cx="45" cy="756" r="1.5" fill="rgb%28124,255,190%29" fill-opacity="0.79"/%3E%3Ccircle cx="334" cy="466" r="0.8" fill="rgb%28124,255,190%29" fill-opacity="0.51"/%3E%3Ccircle cx="123" cy="719" r="0.7" fill="rgb%280,224,122%29" fill-opacity="0.79"/%3E%3Ccircle cx="273" cy="534" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.72"/%3E%3Ccircle cx="390" cy="600" r="0.8" fill="rgb%280,224,122%29" fill-opacity="0.77"/%3E%3Ccircle cx="353" cy="20" r="1.5" fill="rgb%28233,242,237%29" fill-opacity="0.8"/%3E%3Ccircle cx="321" cy="691" r="0.8" fill="rgb%28124,255,190%29" fill-opacity="0.41"/%3E%3C/svg%3E') center / cover no-repeat;
+}
+.hero::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:var(--hero-stars); transition:opacity .9s ease; }
+.webgl-ready .hero::after{ opacity:0; }
+.no-webgl .webgl{ display:none; }
+@media (max-width:819px), (pointer:coarse){
+  .webgl{ display:none; }
+}
+
+/* ═══ POČÍTAT JEN TO, CO JE VIDĚT ═══
+   Stránka má přes 1 500 prvků a polovinu tvoří mockupy v sekci Práce. Před prvním
+   vykreslením se dřív počítalo rozvržení úplně všeho; content-visibility:auto
+   nechá prohlížeč sekce pod ohybem přeskočit, dokud se k nim nepřiblíží.
+   contain-intrinsic-size je odhad výšky nevykreslené sekce, „auto" si pak
+   zapamatuje skutečnou. Před skokem na kotvu main.js přidá .cv-off, protože
+   s odhadnutými výškami by odkaz z menu minul cíl. */
+.section, .stats, .footer{ content-visibility:auto; contain-intrinsic-size:auto 1100px; }
+#prace{ contain-intrinsic-size:auto 3200px; }
+.cv-off .section, .cv-off .stats, .cv-off .footer{ content-visibility:visible; }
+
+/* nekonečné animace se mimo obrazovku pozastaví (přepíná main.js) */
+.anim-off, .anim-off *{ animation-play-state:paused !important; }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width:1080px){
@@ -1425,6 +1560,7 @@ a.cta__line:hover .cta__lineVal{ color:var(--green); }
   .cl--pokis{ height:24px; }
   .cl--blaho{ height:17px; }
   .cl--glowly{ height:18px; }
+  .cl--qeris{ height:20px; }
   .hero{ min-height:92svh; padding-top:120px; }
   .hero__cta .btn{ flex:1 1 auto; }
   .footer__cols{ grid-template-columns:1fr 1fr; }

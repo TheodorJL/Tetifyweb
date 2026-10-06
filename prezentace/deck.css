@@ -1,0 +1,338 @@
+/* ═══════════════════════════════════════════════════════
+   TETIFY — prezentace firmy do PDF
+   Snímky 1920 × 1080 ve vzhledu webu tetify.cz: tmavá plocha, zelený akcent,
+   Inter Tight v nadpisech, JetBrains Mono ve štítcích. Barvy a fonty se berou
+   z proměnných v css/style.css, náhledy projektů se kopírují z index.html
+   (viz skript na konci prezentace.html). PDF: scripts/prezentace-pdf.sh
+   ═══════════════════════════════════════════════════════ */
+
+@page{ size:1920px 1080px; margin:0; }
+
+html, body{ margin:0; height:auto !important; overflow:visible !important; background:#010202; }
+body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+.dk-root, .dk-root *{ box-sizing:border-box; }
+/* náhledy se na webu rozehrávají přechody — v PDF chceme rovnou konečný stav */
+.dk-root *{ transition:none !important; }
+.dk-root{
+  --dk-stars:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"%3E%3Ccircle cx="663" cy="308" r="1.4" fill="rgb%280,224,122%29" fill-opacity="0.22"/%3E%3Ccircle cx="1097" cy="192" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.70"/%3E%3Ccircle cx="439" cy="76" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.42"/%3E%3Ccircle cx="492" cy="185" r="1.7" fill="rgb%28233,242,237%29" fill-opacity="0.21"/%3E%3Ccircle cx="1158" cy="253" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.51"/%3E%3Ccircle cx="812" cy="101" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.50"/%3E%3Ccircle cx="272" cy="593" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.49"/%3E%3Ccircle cx="1169" cy="631" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.24"/%3E%3Ccircle cx="1169" cy="384" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.49"/%3E%3Ccircle cx="128" cy="122" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.46"/%3E%3Ccircle cx="1088" cy="875" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.51"/%3E%3Ccircle cx="928" cy="740" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.63"/%3E%3Ccircle cx="1431" cy="499" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.48"/%3E%3Ccircle cx="1792" cy="703" r="2.1" fill="rgb%28233,242,237%29" fill-opacity="0.34"/%3E%3Ccircle cx="149" cy="241" r="1.7" fill="rgb%28233,242,237%29" fill-opacity="0.27"/%3E%3Ccircle cx="700" cy="311" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.20"/%3E%3Ccircle cx="1368" cy="158" r="1.7" fill="rgb%280,216,194%29" fill-opacity="0.37"/%3E%3Ccircle cx="717" cy="1017" r="1.7" fill="rgb%28233,242,237%29" fill-opacity="0.22"/%3E%3Ccircle cx="191" cy="552" r="1.4" fill="rgb%280,224,122%29" fill-opacity="0.21"/%3E%3Ccircle cx="1436" cy="634" r="2.1" fill="rgb%28233,242,237%29" fill-opacity="0.34"/%3E%3Ccircle cx="790" cy="710" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.38"/%3E%3Ccircle cx="1251" cy="239" r="1.4" fill="rgb%280,224,122%29" fill-opacity="0.30"/%3E%3Ccircle cx="588" cy="264" r="2.1" fill="rgb%28124,255,190%29" fill-opacity="0.41"/%3E%3Ccircle cx="1877" cy="1016" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.44"/%3E%3Ccircle cx="1125" cy="569" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.67"/%3E%3Ccircle cx="570" cy="850" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.73"/%3E%3Ccircle cx="309" cy="169" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.31"/%3E%3Ccircle cx="477" cy="24" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.33"/%3E%3Ccircle cx="8" cy="298" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.53"/%3E%3Ccircle cx="652" cy="257" r="2.1" fill="rgb%280,224,122%29" fill-opacity="0.44"/%3E%3Ccircle cx="1783" cy="803" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.40"/%3E%3Ccircle cx="986" cy="820" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.22"/%3E%3Ccircle cx="427" cy="902" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.37"/%3E%3Ccircle cx="107" cy="209" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.49"/%3E%3Ccircle cx="744" cy="52" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.53"/%3E%3Ccircle cx="304" cy="516" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.45"/%3E%3Ccircle cx="236" cy="999" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.46"/%3E%3Ccircle cx="175" cy="295" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.60"/%3E%3Ccircle cx="980" cy="330" r="1.7" fill="rgb%280,224,122%29" fill-opacity="0.30"/%3E%3Ccircle cx="1081" cy="740" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.61"/%3E%3Ccircle cx="610" cy="186" r="2.1" fill="rgb%280,216,194%29" fill-opacity="0.48"/%3E%3Ccircle cx="1860" cy="342" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.48"/%3E%3Ccircle cx="1595" cy="1029" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.53"/%3E%3Ccircle cx="1614" cy="399" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.60"/%3E%3Ccircle cx="464" cy="409" r="1.7" fill="rgb%28233,242,237%29" fill-opacity="0.38"/%3E%3Ccircle cx="59" cy="57" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.33"/%3E%3Ccircle cx="1418" cy="705" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.72"/%3E%3Ccircle cx="746" cy="164" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.31"/%3E%3Ccircle cx="402" cy="691" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.54"/%3E%3Ccircle cx="1843" cy="3" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.64"/%3E%3Ccircle cx="173" cy="245" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.45"/%3E%3Ccircle cx="365" cy="888" r="2.1" fill="rgb%280,216,194%29" fill-opacity="0.23"/%3E%3Ccircle cx="1478" cy="810" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.60"/%3E%3Ccircle cx="173" cy="325" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.20"/%3E%3Ccircle cx="1209" cy="953" r="2.1" fill="rgb%28124,255,190%29" fill-opacity="0.53"/%3E%3Ccircle cx="1220" cy="971" r="2.1" fill="rgb%280,216,194%29" fill-opacity="0.27"/%3E%3Ccircle cx="1122" cy="268" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.64"/%3E%3Ccircle cx="1487" cy="210" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.43"/%3E%3Ccircle cx="1785" cy="398" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.32"/%3E%3Ccircle cx="599" cy="1026" r="1.0" fill="rgb%280,216,194%29" fill-opacity="0.33"/%3E%3Ccircle cx="858" cy="268" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.69"/%3E%3Ccircle cx="1356" cy="1058" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.48"/%3E%3Ccircle cx="1072" cy="1045" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.62"/%3E%3Ccircle cx="1246" cy="8" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.26"/%3E%3Ccircle cx="1267" cy="246" r="1.7" fill="rgb%280,224,122%29" fill-opacity="0.37"/%3E%3Ccircle cx="1061" cy="988" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.32"/%3E%3Ccircle cx="567" cy="86" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.50"/%3E%3Ccircle cx="1556" cy="129" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.53"/%3E%3Ccircle cx="1035" cy="1048" r="1.0" fill="rgb%280,216,194%29" fill-opacity="0.44"/%3E%3Ccircle cx="1092" cy="979" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.58"/%3E%3Ccircle cx="1795" cy="531" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.66"/%3E%3Ccircle cx="280" cy="853" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.43"/%3E%3Ccircle cx="148" cy="492" r="1.4" fill="rgb%280,224,122%29" fill-opacity="0.30"/%3E%3Ccircle cx="620" cy="250" r="1.0" fill="rgb%280,216,194%29" fill-opacity="0.26"/%3E%3Ccircle cx="1808" cy="281" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.61"/%3E%3Ccircle cx="192" cy="815" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.74"/%3E%3Ccircle cx="1704" cy="458" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.75"/%3E%3Ccircle cx="827" cy="694" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.38"/%3E%3Ccircle cx="188" cy="749" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.50"/%3E%3Ccircle cx="902" cy="37" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.47"/%3E%3Ccircle cx="605" cy="1049" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.74"/%3E%3Ccircle cx="1614" cy="468" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.33"/%3E%3Ccircle cx="81" cy="371" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.65"/%3E%3Ccircle cx="1739" cy="529" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.49"/%3E%3Ccircle cx="1054" cy="1012" r="2.1" fill="rgb%280,216,194%29" fill-opacity="0.23"/%3E%3Ccircle cx="117" cy="375" r="1.4" fill="rgb%280,224,122%29" fill-opacity="0.33"/%3E%3Ccircle cx="34" cy="181" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.53"/%3E%3Ccircle cx="455" cy="136" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.44"/%3E%3Ccircle cx="694" cy="855" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.20"/%3E%3Ccircle cx="1453" cy="488" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.33"/%3E%3Ccircle cx="370" cy="413" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.48"/%3E%3Ccircle cx="421" cy="593" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.33"/%3E%3Ccircle cx="1645" cy="37" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.19"/%3E%3Ccircle cx="1501" cy="1035" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.47"/%3E%3Ccircle cx="503" cy="915" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.55"/%3E%3Ccircle cx="1118" cy="805" r="1.7" fill="rgb%280,216,194%29" fill-opacity="0.57"/%3E%3Ccircle cx="470" cy="701" r="1.0" fill="rgb%28124,255,190%29" fill-opacity="0.41"/%3E%3Ccircle cx="711" cy="111" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.22"/%3E%3Ccircle cx="1517" cy="523" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.21"/%3E%3Ccircle cx="1362" cy="780" r="1.7" fill="rgb%280,216,194%29" fill-opacity="0.52"/%3E%3Ccircle cx="1418" cy="600" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.29"/%3E%3Ccircle cx="550" cy="913" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.39"/%3E%3Ccircle cx="673" cy="662" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.73"/%3E%3Ccircle cx="633" cy="446" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.18"/%3E%3Ccircle cx="781" cy="171" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.47"/%3E%3Ccircle cx="411" cy="508" r="1.7" fill="rgb%280,224,122%29" fill-opacity="0.23"/%3E%3Ccircle cx="1673" cy="183" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.51"/%3E%3Ccircle cx="806" cy="46" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.54"/%3E%3Ccircle cx="173" cy="317" r="2.1" fill="rgb%28233,242,237%29" fill-opacity="0.62"/%3E%3Ccircle cx="1475" cy="1012" r="1.0" fill="rgb%280,216,194%29" fill-opacity="0.59"/%3E%3Ccircle cx="1317" cy="296" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.60"/%3E%3Ccircle cx="1663" cy="1035" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.65"/%3E%3Ccircle cx="1196" cy="470" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.20"/%3E%3Ccircle cx="1304" cy="738" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.66"/%3E%3Ccircle cx="1143" cy="103" r="2.1" fill="rgb%280,224,122%29" fill-opacity="0.54"/%3E%3Ccircle cx="1394" cy="500" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.18"/%3E%3Ccircle cx="1633" cy="143" r="2.1" fill="rgb%280,224,122%29" fill-opacity="0.56"/%3E%3Ccircle cx="135" cy="970" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.66"/%3E%3Ccircle cx="480" cy="420" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.46"/%3E%3Ccircle cx="783" cy="157" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.62"/%3E%3Ccircle cx="1263" cy="406" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.37"/%3E%3Ccircle cx="1334" cy="623" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.19"/%3E%3Ccircle cx="124" cy="994" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.57"/%3E%3Ccircle cx="1383" cy="1002" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.44"/%3E%3Ccircle cx="955" cy="242" r="1.7" fill="rgb%28124,255,190%29" fill-opacity="0.36"/%3E%3Ccircle cx="175" cy="968" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.44"/%3E%3Ccircle cx="1679" cy="1037" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.40"/%3E%3Ccircle cx="1877" cy="431" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.26"/%3E%3Ccircle cx="1073" cy="536" r="1.2" fill="rgb%28124,255,190%29" fill-opacity="0.52"/%3E%3Ccircle cx="1293" cy="1041" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.58"/%3E%3Ccircle cx="473" cy="1019" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.19"/%3E%3Ccircle cx="7" cy="1006" r="2.1" fill="rgb%28233,242,237%29" fill-opacity="0.41"/%3E%3Ccircle cx="1489" cy="288" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.39"/%3E%3Ccircle cx="247" cy="678" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.61"/%3E%3Ccircle cx="1718" cy="815" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.59"/%3E%3Ccircle cx="1846" cy="593" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.22"/%3E%3Ccircle cx="799" cy="156" r="1.2" fill="rgb%28233,242,237%29" fill-opacity="0.61"/%3E%3Ccircle cx="1749" cy="98" r="1.2" fill="rgb%280,224,122%29" fill-opacity="0.21"/%3E%3Ccircle cx="1355" cy="584" r="2.1" fill="rgb%28124,255,190%29" fill-opacity="0.32"/%3E%3Ccircle cx="544" cy="893" r="1.7" fill="rgb%280,216,194%29" fill-opacity="0.29"/%3E%3Ccircle cx="764" cy="876" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.70"/%3E%3Ccircle cx="1134" cy="416" r="2.1" fill="rgb%280,224,122%29" fill-opacity="0.21"/%3E%3Ccircle cx="1499" cy="841" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.55"/%3E%3Ccircle cx="586" cy="994" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.28"/%3E%3Ccircle cx="849" cy="703" r="1.2" fill="rgb%280,216,194%29" fill-opacity="0.33"/%3E%3Ccircle cx="1512" cy="532" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.35"/%3E%3Ccircle cx="1141" cy="807" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.55"/%3E%3Ccircle cx="153" cy="425" r="1.7" fill="rgb%28233,242,237%29" fill-opacity="0.49"/%3E%3Ccircle cx="927" cy="681" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.26"/%3E%3Ccircle cx="394" cy="499" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.37"/%3E%3Ccircle cx="186" cy="653" r="1.0" fill="rgb%280,216,194%29" fill-opacity="0.33"/%3E%3Ccircle cx="1166" cy="413" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.40"/%3E%3Ccircle cx="1527" cy="1073" r="1.0" fill="rgb%28233,242,237%29" fill-opacity="0.33"/%3E%3Ccircle cx="1540" cy="127" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.51"/%3E%3Ccircle cx="737" cy="257" r="2.1" fill="rgb%28124,255,190%29" fill-opacity="0.23"/%3E%3Ccircle cx="1836" cy="508" r="1.4" fill="rgb%28233,242,237%29" fill-opacity="0.55"/%3E%3Ccircle cx="884" cy="639" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.20"/%3E%3Ccircle cx="1453" cy="969" r="1.7" fill="rgb%28233,242,237%29" fill-opacity="0.18"/%3E%3Ccircle cx="801" cy="958" r="1.4" fill="rgb%28124,255,190%29" fill-opacity="0.63"/%3E%3Ccircle cx="458" cy="316" r="1.0" fill="rgb%280,224,122%29" fill-opacity="0.72"/%3E%3Ccircle cx="1478" cy="936" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.18"/%3E%3Ccircle cx="257" cy="476" r="1.7" fill="rgb%280,224,122%29" fill-opacity="0.55"/%3E%3Ccircle cx="622" cy="262" r="2.1" fill="rgb%280,216,194%29" fill-opacity="0.48"/%3E%3Ccircle cx="895" cy="229" r="0.9" fill="rgb%280,224,122%29" fill-opacity="0.35"/%3E%3Ccircle cx="1193" cy="392" r="1.4" fill="rgb%280,216,194%29" fill-opacity="0.31"/%3E%3Ccircle cx="1230" cy="2" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.75"/%3E%3Ccircle cx="570" cy="647" r="2.1" fill="rgb%28124,255,190%29" fill-opacity="0.45"/%3E%3Ccircle cx="480" cy="505" r="0.9" fill="rgb%28233,242,237%29" fill-opacity="0.58"/%3E%3Ccircle cx="629" cy="113" r="0.9" fill="rgb%28124,255,190%29" fill-opacity="0.46"/%3E%3Ccircle cx="1381" cy="860" r="0.9" fill="rgb%280,216,194%29" fill-opacity="0.31"/%3E%3C/svg%3E');
+  display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px 0;
+  color:var(--fg); font-family:var(--font); -webkit-font-smoothing:antialiased;
+}
+/* :where drží nulování na nízké specificitě, aby ho odstupy komponent níž přebily */
+.dk-root :where(h1, h2, h3, p, ul){ margin:0; }
+.dk-root :where(ul){ padding:0; list-style:none; }
+@media print{
+  html, body{ background:#040706; }
+  .dk-root{ gap:0; padding:0; }
+}
+
+/* ─── snímek ─────────────────────────────────────────── */
+.dk-slide{
+  position:relative; flex-shrink:0; width:1920px; height:1080px; overflow:hidden;
+  break-after:page; isolation:isolate;
+  /* snímek je pro stránkování jeden nedělitelný kus – jinak Chrome při tisku rozdělí
+     prvek, který přes hranu stránky přesahuje třeba jen před posunutím transformací */
+  contain:layout paint size; break-inside:avoid;
+}
+.dk-slide:last-child{ break-after:auto; }
+@media screen{ .dk-slide{ box-shadow:0 0 0 1px rgba(255,255,255,.09), 0 30px 80px rgba(0,0,0,.6); } }
+/* Pozadí: hvězdy + zelená a tyrkysová záře jako v hero webu; sudé snímky zrcadlově.
+   Záře jsou schválně přechody mezi PLNÝMI barvami (do barvy pozadí), každá ve vlastním
+   boxu. Přechod s průhledností Chrome do PDF vykreslí jako obrázek (~35 kB na kus),
+   přechod plných barev zůstane vektorový. Proto ani karty níž nemají průhledné pozadí. */
+.dk-slide{ background:var(--dk-stars) 0 0 / 1920px 1080px no-repeat #040706; }
+.dk-slide::before, .dk-slide::after{ content:''; position:absolute; z-index:-1; }
+.dk-slide::before{
+  left:0; top:0; width:960px; height:346px;
+  background:var(--dk-stars) 0 0 / 1920px 1080px no-repeat,
+             radial-gradient(686px 448px at 269px -108px, #032c1a, #040706);
+}
+.dk-slide::after{
+  right:0; bottom:0; width:646px; height:308px;
+  background:var(--dk-stars) 100% 100% / 1920px 1080px no-repeat,
+             radial-gradient(602px 434px at 608px 438px, #041e1b, #040706);
+}
+.dk-slide:nth-child(even)::before{
+  left:auto; right:0;
+  background:var(--dk-stars) 100% 0 / 1920px 1080px no-repeat,
+             radial-gradient(686px 448px at 691px -108px, #032c1a, #040706);
+}
+.dk-slide:nth-child(even)::after{
+  right:auto; left:0;
+  background:var(--dk-stars) 0 100% / 1920px 1080px no-repeat,
+             radial-gradient(602px 434px at 38px 438px, #041e1b, #040706);
+}
+
+.dk-top{
+  position:absolute; z-index:6; top:60px; left:96px; right:96px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.dk-top__logo{ height:44px; width:auto; }
+.dk-top__num{ font-family:var(--font-mono); font-size:17px; letter-spacing:.06em; color:var(--fg-3); }
+.dk-top__num b{ font-weight:500; color:var(--fg); }
+.dk-top__num i{ font-style:normal; }
+
+.dk-body{ position:absolute; left:96px; right:96px; top:150px; bottom:76px; }
+/* snímky s nadpisem nahoře a mřížkou pod ním: mřížka vyplní zbytek výšky */
+.dk-col{ display:flex; flex-direction:column; align-items:flex-start; }
+.dk-col > .dk-grid, .dk-col > .dk-qrow, .dk-col > .dk-terms{ align-self:stretch; }
+.dk-col > .dk-services, .dk-col > .dk-refs{ flex:1; grid-auto-rows:1fr; }
+.dk-split{ display:grid; grid-template-columns:730px minmax(0,1fr); column-gap:86px; align-items:center; }
+.dk-split--rev{ grid-template-columns:minmax(0,1fr) 720px; }
+.dk-viz{ position:relative; height:100%; display:grid; place-items:center; }
+
+/* ─── text ───────────────────────────────────────────── */
+.dk-eyebrow{
+  display:inline-flex; align-items:center; gap:12px; padding:11px 20px 11px 18px; border-radius:99px;
+  border:1px solid var(--line-2); background:rgba(255,255,255,.035);
+  font-family:var(--font-mono); font-size:15px; letter-spacing:.2em; text-transform:uppercase; color:var(--green);
+}
+.dk-eyebrow i{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 14px var(--green); }
+.dk-h{
+  margin-top:30px; font-family:var(--font-dsp); font-weight:600; font-size:86px; line-height:1.05;
+  letter-spacing:-.04em; color:var(--fg);
+}
+.dk-h em{ font-style:normal; color:var(--green-lt); }
+.dk-h--row{ font-size:78px; margin-top:26px; white-space:nowrap; }
+.dk-lead{ margin-top:30px; font-size:26.5px; line-height:1.5; color:var(--fg-2); text-wrap:pretty; }
+.dk-checks{ margin-top:36px; display:grid; gap:17px; }
+/* fajfka je absolutně vlevo a text plyne normálně – ve flexboxu by se vložená značka
+   uprostřed věty (dk-nb) stala samostatnou položkou s mezerami kolem */
+.dk-checks li{ position:relative; padding-left:54px; font-size:24.5px; line-height:36px; letter-spacing:-.01em; color:var(--fg); }
+.dk-checks li::before{
+  content:''; position:absolute; left:0; top:0; width:36px; height:36px; border-radius:50%;
+  background:rgba(0,224,122,.13) url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%237cffbe" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="m5 12.5 4.5 4.5L19 7.5"/%3E%3C/svg%3E') center / 19px no-repeat; border:1px solid rgba(0,224,122,.32);
+}
+.dk-chips{ margin-top:34px; display:flex; flex-wrap:wrap; gap:10px; }
+.dk-chips span{
+  font-family:var(--font-mono); font-size:15px; letter-spacing:.04em; padding:10px 16px; border-radius:10px;
+  border:1px solid var(--line-2); color:var(--fg-2); background:rgba(255,255,255,.025);
+}
+/* slova se spojovníkem (e-shop, e-mail) se nesmí zlomit; vlastní značka, aby na ni
+   nesedly styly štítků mířící na span */
+dk-nb{ white-space:nowrap; }
+.dk-note{ margin-top:28px; font-size:19px; line-height:1.5; color:var(--fg-3); }
+
+/* hlavička klienta u případových studií */
+.dk-client{ display:flex; align-items:center; gap:18px; }
+.dk-client__logo{
+  flex:0 0 68px; height:68px; border-radius:18px; display:grid; place-items:center;
+  background:rgba(255,255,255,.055); border:1px solid var(--line-2);
+}
+.dk-client__logo img{ max-width:44px; max-height:40px; width:auto; height:auto; }
+.dk-client b{ display:block; font-family:var(--font-dsp); font-size:25px; font-weight:600; letter-spacing:-.015em; }
+.dk-client em{
+  display:block; margin-top:5px; font-style:normal; font-family:var(--font-mono); font-size:14px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--green);
+}
+
+/* ikony vkládá skript podle data-i */
+[data-i]{ display:inline-grid; place-items:center; }
+[data-i] svg{ width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ─── karty ──────────────────────────────────────────── */
+/* Karty mají jednu plnou barvu. Neprůhledné jsou proto, že na webu hvězdy pod nimi rozmaže
+   backdrop-filter a v PDF by prosvítaly jako tečky mezi písmeny. A bez přechodu proto,
+   že Chrome při tisku každý lineární přechod vykreslí jako obrázek (~90 kB na kartu). */
+.dk-card{
+  position:relative; display:flex; flex-direction:column; border-radius:28px; padding:34px 32px 30px;
+  border:1px solid var(--line); background:#0d1512;
+}
+.dk-card--accent{ background:#0a2519; border-color:rgba(0,224,122,.34); }
+.dk-ico{
+  width:58px; height:58px; border-radius:16px; font-size:28px; color:var(--green-lt);
+  background:rgba(0,224,122,.1); border:1px solid rgba(0,224,122,.24);
+}
+.dk-card h3{ margin-top:24px; font-family:var(--font-dsp); font-size:27px; font-weight:600; letter-spacing:-.025em; line-height:1.16; }
+.dk-card p{ margin-top:12px; font-size:18.5px; line-height:1.5; color:var(--fg-2); text-wrap:pretty; }
+.dk-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:22px; }
+.dk-tags span{
+  font-family:var(--font-mono); font-size:13px; letter-spacing:.05em; padding:6px 11px; border-radius:8px;
+  border:1px solid var(--line); color:var(--fg-3); background:rgba(255,255,255,.02);
+}
+.dk-grid{ display:grid; gap:24px; margin-top:44px; }
+.dk-grid--4{ grid-template-columns:repeat(4,1fr); }
+.dk-grid--3{ grid-template-columns:repeat(3,1fr); }
+.dk-grid--2{ grid-template-columns:repeat(2,1fr); }
+
+/* ─── náhledy projektů (z webu, zvětšené přes zoom → v PDF zůstávají vektorové) ── */
+.dk-frame{ position:relative; border-radius:30px; overflow:hidden; border:1px solid var(--line-2); box-shadow:0 50px 100px -50px #000; }
+.dk-shot{ position:relative; overflow:hidden; }
+.dk-shot > *{ position:absolute; inset:0; }
+.dk-zoom{ position:relative; }
+
+/* ─── plovoucí kartičky ──────────────────────────────── */
+.dk-float{
+  position:absolute; z-index:3; border-radius:22px; padding:20px 24px;
+  background:#0c1411; border:1px solid var(--line-2);
+  box-shadow:0 30px 60px -30px #000; font-size:19px; color:var(--fg);
+}
+.dk-f-row{ display:flex; align-items:center; gap:16px; }
+.dk-f-ico{
+  flex:0 0 52px; height:52px; border-radius:14px; font-size:25px; color:var(--green-lt);
+  background:rgba(0,224,122,.11); border:1px solid rgba(0,224,122,.26);
+}
+.dk-f-label{ display:block; font-family:var(--font-mono); font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-3); }
+.dk-f-title{ display:block; font-family:var(--font-dsp); font-size:22px; font-weight:600; letter-spacing:-.02em; line-height:1.2; }
+.dk-f-sub{ display:block; margin-top:3px; font-size:15.5px; color:var(--fg-3); }
+.dk-f-big{ font-family:var(--font-dsp); font-size:44px; font-weight:600; letter-spacing:-.035em; line-height:1.1; }
+.dk-f-big small{ margin-left:10px; font-family:var(--font); font-size:17px; font-weight:600; letter-spacing:0; color:var(--green); }
+.dk-badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.dk-badge{
+  font-family:var(--font-mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:5px 10px; border-radius:8px;
+  border:1px solid var(--line-2); color:var(--fg-2);
+}
+.dk-badge--green{ color:var(--green-lt); border-color:rgba(0,224,122,.35); background:rgba(0,224,122,.1); }
+.dk-bar{ display:block; height:8px; margin-top:14px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; }
+.dk-bar i{ display:block; height:100%; border-radius:99px; background:var(--green); }
+.dk-toggle{ flex:0 0 58px; height:34px; border-radius:99px; background:var(--green); position:relative; }
+.dk-toggle::after{ content:''; position:absolute; top:4px; right:4px; width:26px; height:26px; border-radius:50%; background:#04120b; }
+.dk-float--pill{ display:flex; align-items:center; gap:16px; border-radius:99px; padding:16px 28px 16px 18px; font-size:21px; font-weight:500; }
+.dk-float--toast{ display:flex; align-items:center; gap:14px; border-radius:99px; padding:16px 26px 16px 20px; font-size:20px; font-weight:500; }
+.dk-float--toast [data-i]{ font-size:26px; color:var(--green); }
+.dk-kv{ display:grid; grid-template-columns:auto 1fr; gap:9px 22px; margin-top:14px; font-size:17px; }
+.dk-kv span{ color:var(--fg-3); }
+.dk-kv b{ font-weight:500; text-align:right; }
+.dk-seg{ display:flex; gap:4px; padding:6px; border-radius:99px; }
+.dk-seg span{ padding:10px 22px; border-radius:99px; font-size:18px; font-weight:500; color:var(--fg-3); }
+.dk-seg .is-on{ background:var(--green); color:#04120b; }
+
+/* ─── tlačítka ───────────────────────────────────────── */
+.dk-btns{ display:flex; gap:14px; margin-top:40px; }
+.dk-btn{ display:inline-flex; align-items:center; gap:12px; padding:20px 34px; border-radius:99px; font-size:22px; font-weight:500; letter-spacing:-.01em; white-space:nowrap; }
+.dk-btn [data-i]{ font-size:22px; }
+.dk-btn--primary{ color:#04120b; background:var(--green); box-shadow:0 10px 40px -10px rgba(0,224,122,.6); }
+.dk-btn--ghost{ color:var(--fg); border:1px solid var(--line-2); background:rgba(255,255,255,.03); }
+
+/* ─── 01 a poslední: karta uprostřed, kolem ní práce v drobných ─── */
+.dk-center{ position:absolute; inset:0; z-index:4; display:grid; place-items:center; }
+.dk-hero{
+  position:relative; width:770px; padding:62px 64px 64px; border-radius:40px;
+  background:#0b120f; border:1px solid var(--line-2);
+  box-shadow:0 60px 120px -60px #000, 0 0 110px -30px rgba(0,224,122,.28);
+}
+.dk-hero__logo{ height:62px; width:auto; }
+.dk-hero .dk-h{ margin-top:44px; font-size:68px; }
+.dk-hero .dk-lead{ margin-top:24px; font-size:23px; }
+.dk-fields{ display:grid; gap:12px; margin-top:34px; }
+.dk-field{
+  display:grid; grid-template-columns:118px 1fr auto; align-items:center; padding:19px 24px; border-radius:18px;
+  background:rgba(255,255,255,.045); border:1px solid var(--line);
+}
+.dk-field span{ font-family:var(--font-mono); font-size:13.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3); }
+.dk-field b{ font-family:var(--font-dsp); font-size:25px; font-weight:600; letter-spacing:-.015em; }
+.dk-field [data-i]{ font-size:22px; color:var(--fg-3); }
+.dk-hero--end{ padding-top:54px; padding-bottom:54px; }
+.dk-hero--end .dk-h{ margin-top:38px; font-size:60px; }
+.dk-hero .dk-btns .dk-btn{ width:auto; margin-top:0; padding:20px 34px; }
+.dk-hero > .dk-btn{ width:100%; justify-content:center; margin-top:26px; padding:22px; }
+.dk-legal{ position:absolute; left:0; right:0; bottom:38px; text-align:center; font-size:15.5px; color:var(--fg-3); }
+.dk-spark{ display:block; width:100%; height:54px; margin-top:8px; }
+
+/* ─── 02 kdo jsme ────────────────────────────────────── */
+.dk-facts{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; width:100%; }
+.dk-fact{ padding:30px 32px 28px; }
+.dk-fact b{ font-family:var(--font-dsp); font-size:92px; font-weight:600; line-height:1; letter-spacing:-.05em; color:var(--green-lt); }
+.dk-fact b small{ font-size:44px; letter-spacing:-.03em; margin-left:6px; }
+.dk-fact h3{ margin-top:14px; font-size:24px; }
+.dk-fact p{ margin-top:6px; font-size:17.5px; color:var(--fg-3); }
+.dk-trust{ grid-column:1 / -1; flex-direction:row; align-items:center; gap:34px; padding:24px 32px; }
+.dk-trust > span{ flex:0 0 auto; font-family:var(--font-mono); font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--fg-3); }
+.dk-trust div{ flex:1; display:flex; align-items:center; justify-content:space-between; gap:26px; }
+.dk-trust img{ height:34px; width:auto; opacity:.8; }
+
+/* ─── 03 služby ──────────────────────────────────────── */
+.dk-services{ margin-top:36px; }
+.dk-services .dk-card{ padding:28px 28px 26px; }
+.dk-services .dk-ico{ width:54px; height:54px; font-size:26px; }
+.dk-services .dk-card h3{ margin-top:20px; font-size:26px; }
+.dk-services .dk-card p{ margin-top:10px; font-size:17.5px; }
+.dk-services .dk-tags{ padding-top:16px; }
+.dk-card--ask h3{ font-size:30px; }
+.dk-card--ask .dk-mail{ margin-top:auto; padding-top:22px; font-family:var(--font-mono); font-size:17px; letter-spacing:.04em; color:var(--green-lt); }
+
+/* ─── 04 AI a integrace: tři kroky pod sebou ─────────── */
+.dk-stack{ position:relative; width:800px; display:grid; gap:44px; }
+.dk-stack .dk-float{ position:relative; }
+.dk-stack .dk-float + .dk-float::before{
+  content:''; position:absolute; left:64px; top:-45px; height:44px; border-left:2px dashed rgba(124,255,190,.35);
+}
+.dk-stack .dk-kv{ font-size:19px; gap:11px 30px; }
+.dk-demo{ position:absolute; right:0; bottom:0; font-family:var(--font-mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3); }
+
+/* ─── případovky se dvěma kartami / produkty ─────────── */
+.dk-pcard{ padding:0; overflow:hidden; }
+.dk-pcard__body{ display:flex; flex-direction:column; flex:1; padding:28px 32px 30px; }
+.dk-pcard .dk-shot{ border-bottom:1px solid var(--line); }
+.dk-pcard h3{ margin-top:10px; font-size:29px; }
+.dk-pcard p{ font-size:19px; }
+.dk-kicker{ font-family:var(--font-mono); font-size:13.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--green); }
+.dk-brand{ display:flex; align-items:center; gap:14px; }
+.dk-brand img{ height:34px; width:auto; }
+.dk-brand b{ font-family:var(--font-dsp); font-size:38px; font-weight:700; letter-spacing:-.045em; }
+.dk-brand b em{ font-style:normal; color:var(--green); }
+.dk-brand .dk-badge{ margin-left:auto; }
+
+/* citace na snímku s migrací */
+.dk-quote-float{ width:520px; padding:26px 30px; }
+.dk-quote-float p{ font-size:21px; line-height:1.45; color:var(--fg); }
+.dk-quote-float span{ display:block; margin-top:14px; font-size:16px; color:var(--fg-3); }
+.dk-quote-float span b{ color:var(--green-lt); font-weight:600; }
+
+/* ─── mobilní aplikace ───────────────────────────────── */
+.dk-phones{ position:relative; width:900px; height:820px; }
+.dk-phones img{ position:absolute; width:340px; height:auto; border-radius:34px; border:1px solid var(--line-2); box-shadow:0 50px 90px -40px #000; }
+.dk-phones img:nth-child(1){ left:16px; top:92px; transform:rotate(-7deg); }
+.dk-phones img:nth-child(2){ right:16px; top:92px; transform:rotate(7deg); }
+.dk-phones img:nth-child(3){ left:265px; top:8px; width:370px; }
+.dk-apps{ display:flex; gap:26px; margin-top:34px; }
+.dk-apps span{ display:flex; align-items:center; gap:12px; font-size:19px; font-weight:500; color:var(--fg-2); }
+.dk-apps img{ width:46px; height:46px; border-radius:12px; }
+
+/* ─── proces ─────────────────────────────────────────── */
+.dk-steps{ position:relative; }
+.dk-steps::before{ content:''; position:absolute; left:40px; right:40px; top:-23px; border-top:2px dashed rgba(124,255,190,.28); }
+.dk-step{ min-height:404px; }
+.dk-step__n{ font-family:var(--font-mono); font-size:19px; letter-spacing:.1em; color:var(--green); }
+.dk-step__dot{ position:absolute; top:-33px; left:32px; width:20px; height:20px; border-radius:50%; background:var(--green); box-shadow:0 0 0 6px #040706, 0 0 24px var(--green); }
+.dk-step h3{ margin-top:22px; font-size:32px; }
+.dk-step p{ font-size:20px; }
+.dk-terms{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:24px; }
+.dk-term{ flex-direction:row; align-items:center; gap:18px; padding:22px 26px; }
+.dk-term [data-i]{ flex:0 0 auto; font-size:26px; color:var(--green-lt); }
+.dk-term b{ display:block; font-family:var(--font-dsp); font-size:21px; font-weight:600; letter-spacing:-.015em; }
+.dk-term span{ display:block; margin-top:3px; font-size:16.5px; color:var(--fg-3); }
+
+/* ─── reference ──────────────────────────────────────── */
+.dk-ref{ align-items:center; text-align:center; padding:0 28px 32px; }
+.dk-ref__logo{ flex:1; display:grid; place-items:center; width:100%; min-height:176px; }
+.dk-ref__logo img{ width:auto; max-width:none; }   /* výšku má každé logo u sebe – SVG se samo nezvětší */
+.dk-ref h3{ margin-top:0; font-size:27px; }
+.dk-ref p{ margin-top:8px; font-size:18px; color:var(--fg-3); }
+
+.dk-qrow{ display:grid; grid-template-columns:1.45fr 1fr; gap:24px; margin-top:24px; }
+.dk-qrow:first-of-type{ margin-top:38px; }
+.dk-qrow--rev{ grid-template-columns:1fr 1.45fr; }
+.dk-q{ padding:30px 32px 28px; }
+.dk-q::before{ content:'“'; font-family:Georgia,'Times New Roman',serif; font-size:84px; line-height:.8; height:40px; color:var(--green); opacity:.6; }
+.dk-q p{ margin-top:6px; font-size:19.5px; line-height:1.52; color:var(--fg); }
+.dk-q footer{ display:flex; align-items:center; gap:14px; margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
+.dk-q footer i{
+  flex:0 0 46px; height:46px; border-radius:50%; display:grid; place-items:center; font-style:normal;
+  font-family:var(--font-dsp); font-size:19px; font-weight:600; color:var(--green); background:rgba(0,224,122,.12); border:1px solid rgba(0,224,122,.28);
+}
+.dk-q footer b{ display:block; font-family:var(--font-dsp); font-size:19px; font-weight:600; }
+.dk-q footer span{ display:block; font-size:15.5px; color:var(--fg-3); }
+
+/* ─── náhledy z webu v PDF ───────────────────────────────
+   Web má v náhledech rozmazané barevné kruhy přes filter:blur. Filtr se v PDF rastruje
+   (větší soubor) a při zoomu umí vytéct mimo rám, proto je tady nahrazují přechody. */
+.dk-root .monb__blob, .dk-root .mpod__blob{ filter:none; opacity:1; }
+.dk-root .monb__blob--a{ width:340px; height:340px; top:-155px; left:-125px; background:radial-gradient(closest-side,rgba(158,197,239,.82) 30%,rgba(158,197,239,0)); }
+.dk-root .monb__blob--b{ width:340px; height:340px; top:-135px; right:-135px; background:radial-gradient(closest-side,rgba(247,207,179,.82) 30%,rgba(247,207,179,0)); }
+.dk-root .mpod__blob--a{ width:310px; height:310px; top:-125px; left:-115px; background:radial-gradient(closest-side,rgba(168,216,204,.78) 30%,rgba(168,216,204,0)); }
+.dk-root .mpod__blob--b{ width:290px; height:290px; bottom:-135px; right:calc(10% - 55px); background:radial-gradient(closest-side,rgba(203,187,233,.78) 30%,rgba(203,187,233,0)); }
+.dk-root .mpod__blob--c{ width:270px; height:270px; bottom:-115px; right:-105px; background:radial-gradient(closest-side,rgba(242,196,179,.78) 30%,rgba(242,196,179,0)); }
+.dk-root .mblaho::before{ filter:none; width:460px; height:460px; right:-190px; top:-210px; background:radial-gradient(closest-side,#ffe1e6 30%,rgba(255,225,230,0)); }
+.dk-root .mblaho::after{ filter:none; width:400px; height:400px; left:-190px; bottom:-220px; background:radial-gradient(closest-side,#efe6ff 30%,rgba(239,230,255,0)); }

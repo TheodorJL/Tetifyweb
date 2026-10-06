@@ -207,6 +207,46 @@ a softwarovým WebGL — před úpravou 4,4 s práce hlavního vlákna, po ní *
 Co zůstává: „nepoužívaný JavaScript" (three.js na desktopu — bez bundleru se nedá
 ořezat) a minifikace vlastního CSS/JS (jednotky kB, projekt záměrně nemá build).
 
+## Prezentace firmy (PDF)
+
+Patnáct snímků 16 : 9 ve vzhledu webu, postavených stejně jako prezentace Qerisu:
+HTML stránka se snímky 1920 × 1080 px, kterou Chrome bez okna vytiskne do PDF.
+
+```
+scripts/prezentace-pdf.sh            # → prezentace/Tetify-prezentace.pdf
+```
+
+| Soubor | K čemu je |
+|---|---|
+| `prezentace.html` | Snímky. Texty vycházejí z webu, jen jsou kratší. |
+| `prezentace/deck.css` | Vzhled snímků. Barvy a fonty bere z proměnných v `css/style.css`. |
+| `prezentace/assets/` | Bílé varianty log (web je bělí CSS filtrem, v PDF by se rozmazaly). |
+| `scripts/prezentace-pdf.sh` | Spustí si na chvíli místní server a vytiskne PDF. |
+
+Náhledy projektů (ČOV, WACA, Fleysen, Blaho, Theis, Pokis, Qeris) se **kopírují přímo
+z `index.html`** – skript na konci `prezentace.html` si web načte a prvky `.mcov`, `.mwaca`…
+vloží na místa označená `data-mock`. Prezentace tak vždy ukazuje totéž co web a náhledy
+zůstávají v PDF vektorové (zvětšují se přes `zoom`). Kvůli tomu načítání musí prezentace běžet
+přes http, ne z `file://` – skript na PDF si server spouští sám, pro náhled v prohlížeči
+stačí `python3 -m http.server` a `/prezentace.html`.
+
+Na web se nic z toho nenasazuje (`firebase.json` ignoruje `prezentace.html`, `prezentace/`
+i `scripts/`). Kdyby mělo PDF viset na `tetify.cz/prezentace.pdf` jako u Qerisu, stačí ho
+zkopírovat do kořene a nasadit.
+
+Na co si dát pozor při úpravách (Chrome 154, tisk do PDF):
+
+- **Přechody se rastrují.** Každý `linear-gradient` na pozadí prvku skončí v PDF jako
+  obrázek (~90 kB na kartu), s průhledností i bez. Karty proto mají jednu plnou barvu
+  a záře na pozadí jsou dva malé boxy s přechodem do barvy pozadí. Rozdíl: 10,6 MB → 4,9 MB.
+- **`filter: blur` taky**, a při `zoom` umí vytéct mimo rám. Rozmazané kruhy z náhledů
+  jsou v `deck.css` nahrazené přechody.
+- **Snímek musí být nedělitelný** (`contain: layout paint size`). Bez toho Chrome rozdělí
+  prvek, který přes hranu stránky přesahuje jen před posunutím transformací – typicky
+  karta vystředěná přes `top:50%` + `translateY(-50%)`.
+- **Čísla.** V prezentaci jsou jen ověřitelné údaje (3 produkty, Praha a Karlovy Vary).
+  Statistiky „40+ projektů“ a „100 %“ z webu v ní schválně nejsou, dokud je nikdo nepotvrdí.
+
 ## Barvy
 
 Definované jako CSS proměnné na začátku `css/style.css`:

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Tetify – prezentace firmy</title>
+<link rel="icon" href="assets/favicon-32.png?v=3" type="image/png">
+<!-- Prezentace firmy do PDF ve vzhledu webu. Jen pracovní soubor – na web se nenasazuje
+     (firebase.json ho ignoruje). Náhled: spusťte místní server a otevřete /prezentace.html,
+     PDF: scripts/prezentace-pdf.sh → prezentace/Tetify-prezentace.pdf -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Familjen+Grotesk:wght@500;600&family=Poppins:wght@500;600;800&family=DM+Serif+Display&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="prezentace/deck.css">
+</head>
+<body>
+<main class="dk-root">
+
+<!-- ══ 01 · ÚVOD ══ -->
+<section class="dk-slide is-in">
+  <div class="dk-float" style="left:64px;top:104px;width:456px;transform:rotate(-4deg)">
+    <div class="dk-f-row">
+      <span class="dk-f-ico" data-i="hash"></span>
+      <div><b class="dk-f-title">Nejde přihlášení do intranetu</b><span class="dk-f-sub">#it-podpora · před 2 min</span></div>
+    </div>
+    <div class="dk-badges"><span class="dk-badge dk-badge--green">Tiket vytvořen</span><span class="dk-badge">→ Asana</span></div>
+  </div>
+  <div class="dk-float dk-float--pill" style="left:150px;top:340px;transform:rotate(3.5deg)"><span class="dk-toggle"></span>Automatizace zapnutá</div>
+  <div class="dk-float" style="left:44px;top:510px;width:424px;transform:rotate(-3deg)">
+    <span class="dk-f-label">Migrace <dk-nb>e-shopu</dk-nb></span>
+    <b class="dk-f-title" style="margin-top:8px">Shoptet → Shopify</b>
+    <span class="dk-bar"><i style="width:100%"></i></span>
+    <div class="dk-badges"><span class="dk-badge">Produkty</span><span class="dk-badge">Objednávky</span><span class="dk-badge dk-badge--green">Bez výpadku</span></div>
+  </div>
+  <div class="dk-float" style="left:118px;top:846px;width:392px;transform:rotate(4.5deg)">
+    <div class="dk-f-row">
+      <span class="dk-f-ico" data-i="unlock"></span>
+      <div><b class="dk-f-title">Hlavní vchod</b><span class="dk-f-sub">Odemčeno z&nbsp;aplikace</span></div>
+    </div>
+  </div>
+
+  <div class="dk-float" style="left:1456px;top:84px;width:384px;transform:rotate(4deg)">
+    <span class="dk-f-label">Theis · render videa</span>
+    <div class="dk-f-big" style="margin-top:6px">82 %<small>6 sítí</small></div>
+    <span class="dk-bar"><i style="width:82%"></i></span>
+  </div>
+  <div class="dk-float" style="left:1496px;top:344px;width:362px;transform:rotate(-3deg)">
+    <span class="dk-f-label">AI čtení dokumentu</span>
+    <div class="dk-kv"><span>Dodavatel</span><b>rozpoznán</b><span>Částka</span><b>18 450 Kč</b><span>Splatnost</span><b>14. 11. 2026</b></div>
+  </div>
+  <div class="dk-float" style="left:1420px;top:634px;width:376px;transform:rotate(3deg)">
+    <span class="dk-f-label">Qeris · skeny za 7 dní</span>
+    <div class="dk-f-big" style="margin-top:6px">12 480<small>+18 %</small></div>
+    <svg class="dk-spark" viewBox="0 0 320 54" preserveAspectRatio="none"><path d="M0 44 L32 40 L64 43 L96 34 L128 37 L160 27 L192 30 L224 19 L256 22 L288 11 L320 6 L320 54 L0 54 Z" fill="rgba(0,224,122,.12)"/><path d="M0 44 L32 40 L64 43 L96 34 L128 37 L160 27 L192 30 L224 19 L256 22 L288 11 L320 6" fill="none" stroke="#00e07a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+  </div>
+  <div class="dk-float dk-float--toast" style="left:1506px;top:916px;transform:rotate(-4deg)"><span data-i="checkc"></span>Nasazeno do produkce</div>
+  <div class="dk-float dk-seg" style="left:726px;top:936px;transform:rotate(-1.5deg)"><span class="is-on">Web</span><span>Aplikace</span><span>AI</span><span><dk-nb>E-shop</dk-nb></span><span>IT</span></div>
+
+  <div class="dk-center"><div class="dk-hero">
+    <img class="dk-hero__logo" src="prezentace/assets/tetify-white.png" alt="Tetify">
+    <h1 class="dk-h">Řešíme problémy,<br>které <em>vás brzdí.</em></h1>
+    <p class="dk-lead">Technologický partner pro firmy, které chtějí věci konečně vyřešit. Produkty na míru, interní systémy, AI integrace, <dk-nb>e-shopy</dk-nb> i&nbsp;IT podpora&nbsp;— od nápadu po provoz.</p>
+    <div class="dk-btns">
+      <span class="dk-btn dk-btn--primary">tetify.cz <span data-i="arrow"></span></span>
+      <span class="dk-btn dk-btn--ghost">Prezentace firmy · 2026</span>
+    </div>
+  </div></div>
+</section>
+
+<!-- ══ 02 · KDO JSME ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>02</b> / <i>15</i> · Kdo jsme</span></header>
+  <div class="dk-body dk-split">
+    <div>
+      <span class="dk-eyebrow"><i></i>Kdo jsme</span>
+      <h2 class="dk-h">Jeden tým.<br><em>Celá cesta.</em></h2>
+      <p class="dk-lead">Od nápadu k&nbsp;provozu. Nepředáváme vás mezi agenturami&nbsp;— navrhneme, postavíme, nasadíme a&nbsp;pak se o&nbsp;to staráme.</p>
+      <ul class="dk-checks">
+        <li>Návrh, vývoj, nasazení i&nbsp;provoz v&nbsp;jednom týmu</li>
+        <li>Software i&nbsp;hardware&nbsp;— od API po chytré zámky</li>
+        <li>Vlastní produkty, které sami provozujeme</li>
+        <li>Zůstáváme i&nbsp;po spuštění</li>
+      </ul>
+    </div>
+    <div class="dk-viz">
+      <div class="dk-facts">
+        <div class="dk-card dk-fact"><b>3</b><h3>vlastní produkty v&nbsp;provozu</h3><p>theis.cz · pokis.cz · qeris.cz</p></div>
+        <div class="dk-card dk-fact"><b>7</b><h3>oblastí pod jednou střechou</h3><p>Od vývoje po marketing</p></div>
+        <div class="dk-card dk-fact"><b>24<small>h</small></b><h3>do kdy se ozveme</h3><p>Na každou poptávku</p></div>
+        <div class="dk-card dk-fact"><b>2</b><h3>města, kde nás najdete</h3><p>Praha &amp; Karlovy Vary</p></div>
+        <div class="dk-card dk-trust">
+          <span>Důvěřují nám</span>
+          <div>
+            <img src="prezentace/assets/cot-white.svg" alt="Český olympijský výbor" style="height:46px">
+            <img src="prezentace/assets/waca-white.svg" alt="We Are Creative Agency" style="height:46px">
+            <img src="prezentace/assets/fleysen-white.png" alt="Fleysen" style="height:24px">
+            <img src="prezentace/assets/blaho-white.svg" alt="Blaho &amp; work" style="height:27px">
+            <img src="assets/logos/glowly.svg?v=2" alt="Glowly" style="height:30px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 · SLUŽBY ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>03</b> / <i>15</i> · Služby</span></header>
+  <div class="dk-body dk-col">
+    <span class="dk-eyebrow"><i></i>Co děláme</span>
+    <h2 class="dk-h dk-h--row">Sedm oblastí. <em>Jeden tým.</em></h2>
+    <div class="dk-grid dk-grid--4 dk-services">
+      <div class="dk-card"><span class="dk-ico" data-i="layers"></span><h3>Produkty na míru</h3><p>Webové aplikace, portály a&nbsp;platformy od prvního náčrtu po produkci. Postavené tak, aby šly roky rozvíjet.</p><div class="dk-tags"><span>Web apps</span><span>Mobilní aplikace</span><span>SaaS</span></div></div>
+      <div class="dk-card"><span class="dk-ico" data-i="list"></span><h3>Interní systémy</h3><p>Evidence, sklad, schvalování, reporting. Konec tabulek, které nikdo neudržuje.</p><div class="dk-tags"><span>Workflow</span><span>Automatizace</span><span>Reporting</span></div></div>
+      <div class="dk-card"><span class="dk-ico" data-i="spark"></span><h3>AI integrace</h3><p>AI tam, kde reálně ušetří čas: dokumenty, asistenti nad vašimi daty, klasifikace, obsah.</p><div class="dk-tags"><span>LLM</span><span>Asistenti</span><span>Zpracování dat</span></div></div>
+      <div class="dk-card"><span class="dk-ico" data-i="bag"></span><h3><dk-nb>E-shopy</dk-nb> a&nbsp;migrace</h3><p>Ze Shoptetu na Shopify bez ztráty dat, SEO a&nbsp;tržeb. Včetně přepisů URL a&nbsp;napojení skladu.</p><div class="dk-tags"><span>Shoptet → Shopify</span><span>SEO</span></div></div>
+      <div class="dk-card"><span class="dk-ico" data-i="nodes"></span><h3>Integrace a&nbsp;API</h3><p>Propojíme ERP, účetnictví, CRM, marketing i&nbsp;dopravce. Jednou nastavit, pak už jen běží.</p><div class="dk-tags"><span>REST / GraphQL</span><span>Webhooky</span></div></div>
+      <div class="dk-card"><span class="dk-ico" data-i="shield"></span><h3>IT podpora a&nbsp;správa</h3><p>Zařízení, sítě, účty, zálohy, bezpečnost&nbsp;— a&nbsp;někdo, kdo zvedne telefon.</p><div class="dk-tags"><span>Helpdesk</span><span>Infrastruktura</span><span>Bezpečnost</span></div></div>
+      <div class="dk-card"><span class="dk-ico" data-i="trend"></span><h3>Marketing a&nbsp;sítě</h3><p>Kampaně pro koncové zákazníky i&nbsp;B2B a&nbsp;správa sociálních sítí. Obsah, který stojí na datech.</p><div class="dk-tags"><span>Kampaně</span><span>Sociální sítě</span></div></div>
+      <div class="dk-card dk-card--accent dk-card--ask"><span class="dk-ico" data-i="chat"></span><h3>Nevíte, kam váš problém patří?</h3><p>Nepotřebujeme hotové zadání. Stačí, když víte, co vás štve.</p><span class="dk-mail">info@tetify.cz</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 04 · AI A INTEGRACE ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>04</b> / <i>15</i> · AI a&nbsp;integrace</span></header>
+  <div class="dk-body dk-split dk-split--rev">
+    <div class="dk-viz">
+      <div class="dk-stack">
+        <div class="dk-float" style="transform:rotate(-2deg);margin-right:90px">
+          <div class="dk-f-row">
+            <span class="dk-f-ico" data-i="file"></span>
+            <div><span class="dk-f-label">Příchozí <dk-nb>e-mail</dk-nb> · 9:12</span><b class="dk-f-title" style="margin-top:5px;font-size:27px">faktura_0412.pdf</b><span class="dk-f-sub">Příloha od dodavatele · 2 strany</span></div>
+          </div>
+        </div>
+        <div class="dk-float" style="transform:rotate(1.4deg);margin-left:70px">
+          <div class="dk-f-row">
+            <span class="dk-f-ico" data-i="spark"></span>
+            <div><span class="dk-f-label">AI přečte a&nbsp;roztřídí</span><b class="dk-f-title" style="margin-top:5px;font-size:27px">Přijatá faktura</b></div>
+          </div>
+          <div class="dk-kv"><span>Částka</span><b>18 450 Kč</b><span>Splatnost</span><b>14. 11. 2026</b><span>Středisko</span><b>Marketing</b></div>
+        </div>
+        <div class="dk-float" style="transform:rotate(-1deg);margin-right:40px">
+          <span class="dk-f-label">Zapsáno bez přepisování</span>
+          <div class="dk-badges" style="margin-top:14px"><span class="dk-badge dk-badge--green">Účetnictví ✓</span><span class="dk-badge dk-badge--green">Asana · ke schválení</span><span class="dk-badge dk-badge--green">Slack #finance</span></div>
+        </div>
+      </div>
+      <span class="dk-demo">Ukázková data</span>
+    </div>
+    <div>
+      <span class="dk-eyebrow"><i></i>AI a&nbsp;integrace</span>
+      <h2 class="dk-h">Systémy, které<br>spolu nemluví,<br><em>propojíme.</em></h2>
+      <p class="dk-lead">ERP, účetnictví, CRM, <dk-nb>e-shop</dk-nb> i&nbsp;dopravci. A&nbsp;tam, kde to ušetří čas, přidáme AI&nbsp;— čtení dokumentů, asistenty nad vašimi daty, třídění požadavků.</p>
+      <ul class="dk-checks">
+        <li>REST, GraphQL a&nbsp;webhooky</li>
+        <li>Zpracování dokumentů a&nbsp;klasifikace</li>
+        <li>Začínáme jedním případem s&nbsp;měřitelným přínosem</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05 · ČOV · IT PODPORA ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>05</b> / <i>15</i> · Vybraná práce</span></header>
+  <div class="dk-body dk-split">
+    <div>
+      <div class="dk-client"><span class="dk-client__logo"><img src="prezentace/assets/cot-white.svg" alt=""></span><div><b>Český olympijský výbor</b><em>Interní IT podpora</em></div></div>
+      <h2 class="dk-h">Slack, <dk-nb>e-mail</dk-nb> i&nbsp;web.<br><em>Jeden helpdesk.</em></h2>
+      <p class="dk-lead">Požadavky chodily třemi kanály a&nbsp;v&nbsp;každém se ztrácely jinak. Postavili jsme aplikaci, kde tiket vznikne sám&nbsp;— a&nbsp;notifikace se vrátí tam, odkud hlášení přišlo.</p>
+      <ul class="dk-checks">
+        <li>Hlášení ze Slacku, <dk-nb>e-mailu</dk-nb> i&nbsp;webového formuláře</li>
+        <li>Notifikace zpět do stejného kanálu</li>
+        <li>Kompletně synchronizované do Asany</li>
+      </ul>
+      <div class="dk-chips"><span>Slack API</span><span><dk-nb>E-mailový</dk-nb> příjem</span><span>Sync do Asany</span><span>Reporting</span></div>
+    </div>
+    <div class="dk-viz"><div class="dk-zoom" style="width:462px;zoom:1.88"><div data-mock=".mcov"></div></div></div>
+  </div>
+</section>
+
+<!-- ══ 06 · ČOV · DALŠÍ SYSTÉMY ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>06</b> / <i>15</i> · Vybraná práce</span></header>
+  <div class="dk-body dk-col">
+    <div class="dk-client"><span class="dk-client__logo"><img src="prezentace/assets/cot-white.svg" alt=""></span><div><b>Český olympijský výbor</b><em>Onboarding · modernizace · admin</em></div></div>
+    <h2 class="dk-h dk-h--row">Méně klikání. <em>Víc hotové práce.</em></h2>
+    <div class="dk-grid dk-grid--2">
+      <div class="dk-card dk-pcard">
+        <div class="dk-shot" style="width:100%;height:236px;zoom:1.5576"><div data-mock=".monb"></div></div>
+        <div class="dk-pcard__body">
+          <span class="dk-kicker">Onboarding</span>
+          <h3>Nováček zadá kód a&nbsp;aplikace zbytek zařídí sama</h3>
+          <p>Manažer nástup založí a&nbsp;nastaví, co se má zřídit. Aplikace pak založí firemní <dk-nb>e-mail</dk-nb>, přidá kolegu do Google skupin a&nbsp;Slack kanálů, zpřístupní sdílené disky a&nbsp;nastaví podpis v&nbsp;Gmailu.</p>
+          <div class="dk-tags"><span>Google Workspace</span><span>Slack</span><span>Automatizace</span></div>
+        </div>
+      </div>
+      <div class="dk-card dk-pcard">
+        <div class="dk-shot" style="width:100%;height:236px;zoom:1.5576"><div data-mock=".mpod"></div></div>
+        <div class="dk-pcard__body">
+          <span class="dk-kicker">Modernizace &amp; admin</span>
+          <h3>Ze starých systémů udržovatelné aplikace</h3>
+          <p>Přepisujeme zděděné systémy, migrujeme data a&nbsp;stavíme admin rozhraní, ve kterých se dá skutečně pracovat&nbsp;— třeba elektronickou podatelnu. Po částech, které jde nasadit a&nbsp;ověřit.</p>
+          <div class="dk-tags"><span>Refaktoring legacy</span><span>Migrace dat</span><span>Podatelna</span><span>Admin systémy</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07 · WACA ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>07</b> / <i>15</i> · Vybraná práce</span></header>
+  <div class="dk-body dk-split dk-split--rev">
+    <div class="dk-viz">
+      <div class="dk-frame" style="width:900px"><div class="dk-shot" style="width:100%;height:236px;zoom:1.6453"><div data-mock=".mwaca"></div></div></div>
+      <div class="dk-float dk-float--toast" style="right:8px;top:118px;transform:rotate(4deg)"><span data-i="cube"></span>Živý 3D model v&nbsp;prohlížeči</div>
+      <div class="dk-float dk-seg" style="left:70px;bottom:104px;transform:rotate(-2.5deg)"><span class="is-on">Zaklápěcí</span><span>Dvoudílná</span><span>Na láhev</span></div>
+    </div>
+    <div>
+      <div class="dk-client"><span class="dk-client__logo"><img src="prezentace/assets/waca-white.svg" alt=""></span><div><b>We Are Creative Agency</b><em>3D konfigurátor</em></div></div>
+      <h2 class="dk-h">Krabička, kterou<br>zákazník hned<br><em>vidí ve 3D.</em></h2>
+      <p class="dk-lead">Konfigurátor obalů přímo v&nbsp;prohlížeči. Zákazník si krabičku poskládá a&nbsp;celou dobu se dívá na živý 3D model, ne na statický obrázek.</p>
+      <ul class="dk-checks">
+        <li>Typ, rozměr, výplň, potisk i&nbsp;barva</li>
+        <li>Otevírání krabičky posuvníkem</li>
+        <li>Editor jednotlivých stran</li>
+      </ul>
+      <div class="dk-chips"><span>waca.tetify.cz</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 08 · FLEYSEN ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>08</b> / <i>15</i> · Vybraná práce</span></header>
+  <div class="dk-body dk-split">
+    <div>
+      <div class="dk-client"><span class="dk-client__logo"><img src="prezentace/assets/fleysen-white.png" alt="" style="max-width:52px"></span><div><b>Fleysen</b><em>Migrace <dk-nb>e-shopu</dk-nb></em></div></div>
+      <h2 class="dk-h">Ze Shoptetu<br>na Shopify.<br><em>Bez výpadku.</em></h2>
+      <p class="dk-lead">Kompletní migrace produktů, objednávek a&nbsp;zákazníků, přemapování URL kvůli SEO, nová šablona a&nbsp;napojení navazujících služeb. <dk-nb>E-shop</dk-nb> prodával i&nbsp;v&nbsp;den přepnutí.</p>
+      <ul class="dk-checks">
+        <li>Produkty, objednávky a&nbsp;zákazníci beze ztrát</li>
+        <li>SEO přesměrování všech adres</li>
+        <li>Průběžná péče i&nbsp;po spuštění</li>
+      </ul>
+    </div>
+    <div class="dk-viz">
+      <div class="dk-frame" style="width:900px;margin-bottom:150px"><div class="dk-shot" style="width:100%;height:236px;zoom:1.6453"><div data-mock=".mfley"></div></div></div>
+      <div class="dk-float dk-quote-float" style="right:0;bottom:56px;transform:rotate(-2deg)">
+        <p>„Celý projekt doručil 14 dní před stanoveným deadlinem.“</p>
+        <span><b>David</b> · glowly.cz · migrace ze Shoptetu na Shopify</span>
+      </div>
+      <div class="dk-float dk-float--toast" style="left:20px;bottom:120px;transform:rotate(3deg)"><span data-i="checkc"></span>Přepnuto za provozu</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 09 · BLAHO & WORK ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>09</b> / <i>15</i> · Vybraná práce</span></header>
+  <div class="dk-body dk-split dk-split--rev">
+    <div class="dk-viz"><div class="dk-zoom" style="width:462px;zoom:1.86"><div data-mock=".mblaho"></div></div></div>
+    <div>
+      <div class="dk-client"><span class="dk-client__logo"><img src="prezentace/assets/blaho-white.svg" alt="" style="max-width:50px"></span><div><b>Blaho &amp; work</b><em>Chytrý cowork · IoT</em></div></div>
+      <h2 class="dk-h">Do coworku<br>se chodí<br><em>telefonem.</em></h2>
+      <p class="dk-lead">Pro sdílený coworking v&nbsp;Ostrově jsme osadili chytré zámky a&nbsp;další IoT zařízení a&nbsp;napojili je na členskou aplikaci. Bez klíčů a&nbsp;čipů.</p>
+      <ul class="dk-checks">
+        <li>Odemykání vchodu i&nbsp;místností z&nbsp;telefonu</li>
+        <li>Správa přístupů: kdo, kam a&nbsp;kdy</li>
+        <li>Hardware, instalace i&nbsp;software od jednoho týmu</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10 · VLASTNÍ PRODUKTY ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>10</b> / <i>15</i> · Vlastní produkty</span></header>
+  <div class="dk-body dk-col">
+    <span class="dk-eyebrow"><i></i>Vlastní produkty</span>
+    <h2 class="dk-h dk-h--row">Nejen na zakázku. <em>Stavíme i&nbsp;své.</em></h2>
+    <div class="dk-grid dk-grid--3">
+      <div class="dk-card dk-pcard">
+        <div class="dk-shot" style="width:100%;height:204px;zoom:1.5599"><div data-mock=".mtheis"></div></div>
+        <div class="dk-pcard__body">
+          <div class="dk-brand"><img src="assets/logos/theis.svg" alt=""><b>theis<em>.cz</em></b><span class="dk-badge dk-badge--green">Live</span></div>
+          <p>Od karty z&nbsp;kamery po hotové video na šesti sítích. Automatické renderování videí, publikace na sítě i&nbsp;fotoknihovna, která snímky roztřídí a&nbsp;pošle lidem, kteří na nich jsou.</p>
+        </div>
+      </div>
+      <div class="dk-card dk-pcard">
+        <div class="dk-shot" style="width:100%;height:204px;zoom:1.5599"><div data-mock=".mpokis"></div></div>
+        <div class="dk-pcard__body">
+          <div class="dk-brand"><img src="prezentace/assets/pokis-white.png" alt=""><b>pokis<em>.cz</em></b><span class="dk-badge dk-badge--green">Live</span></div>
+          <p>Heureka na pokémony. Hlídač cen a&nbsp;skladů Pokémon TCG napříč desítkami českých <dk-nb>e-shopů</dk-nb>&nbsp;— a&nbsp;upozornění na telefon ve chvíli, kdy se karta naskladní nebo zlevní.</p>
+        </div>
+      </div>
+      <div class="dk-card dk-pcard">
+        <div class="dk-shot" style="width:100%;height:204px;zoom:1.5599"><div data-mock=".mqeris"></div></div>
+        <div class="dk-pcard__body">
+          <div class="dk-brand"><img src="assets/logos/qeris.svg" alt=""><b>qeris<em>.cz</em></b><span class="dk-badge dk-badge--green">Live</span></div>
+          <p>Všechno, co firma posílá ven, na jednom místě. Dynamické QR kódy, mini weby, <dk-nb>e-mailové</dk-nb> podpisy, cenové nabídky na odkaz a&nbsp;hlídání domén&nbsp;— s&nbsp;živými statistikami.</p>
+        </div>
+      </div>
+    </div>
+    <p class="dk-note">Vlastní produkty nás nutí řešit stejné problémy jako vy&nbsp;— provoz, škálování, uživatele. Zkušenosti z&nbsp;nich pak dostanete i&nbsp;vy.</p>
+  </div>
+</section>
+
+<!-- ══ 11 · MOBILNÍ APLIKACE ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>11</b> / <i>15</i> · Mobilní aplikace</span></header>
+  <div class="dk-body dk-split">
+    <div>
+      <span class="dk-eyebrow"><i></i>Mobilní aplikace</span>
+      <h2 class="dk-h">Umíme i<br><em>mobilní appky.</em></h2>
+      <p class="dk-lead">Stejný tým, který staví web a&nbsp;backend, dotáhne i&nbsp;aplikaci do telefonu&nbsp;— od návrhu přes vývoj až po schválení v&nbsp;App Storu.</p>
+      <div class="dk-chips"><span>iOS i&nbsp;Android</span><span>Push notifikace</span><span>Mapy a&nbsp;poloha</span><span>Nahrávání videa</span><span>Chytré zámky</span><span>Publikace do App Storu</span></div>
+      <div class="dk-apps">
+        <span><img src="assets/apps/icon-blaho.webp" alt="">Blaho &amp; work</span>
+        <span><img src="assets/apps/icon-pokis.webp?v=2" alt="">POKIS</span>
+        <span><img src="assets/apps/icon-theis.webp" alt="">THEIS</span>
+      </div>
+      <p class="dk-note" style="margin-top:16px">Všechny tři jsou ke stažení v&nbsp;App Storu.</p>
+    </div>
+    <div class="dk-viz">
+      <div class="dk-phones">
+        <img src="assets/apps/pokis-2.webp" alt="POKIS">
+        <img src="assets/apps/theis-1.webp" alt="THEIS">
+        <img src="assets/apps/blaho-1.webp" alt="Blaho &amp; work">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 12 · JAK PRACUJEME ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>12</b> / <i>15</i> · Jak pracujeme</span></header>
+  <div class="dk-body dk-col">
+    <span class="dk-eyebrow"><i></i>Jak pracujeme</span>
+    <h2 class="dk-h dk-h--row">Žádná magie. <em>Jen pořádek v&nbsp;krocích.</em></h2>
+    <div class="dk-grid dk-grid--4 dk-steps" style="margin-top:78px">
+      <div class="dk-card dk-step"><i class="dk-step__dot"></i><span class="dk-step__n">01</span><h3>Pochopíme problém</h3><p>Sedneme si k&nbsp;tomu, co vás pálí. Ptáme se na proces, ne na technologie&nbsp;— ty vybereme až potom.</p><div class="dk-tags"><span>Proces</span><span>Priority</span></div></div>
+      <div class="dk-card dk-step"><i class="dk-step__dot"></i><span class="dk-step__n">02</span><h3>Navrhneme řešení</h3><p>Dostanete jasný rozsah, odhad a&nbsp;plán. Víte, co se postaví, kdy a&nbsp;za kolik&nbsp;— než začneme psát kód.</p><div class="dk-tags"><span>Rozsah</span><span>Odhad</span><span>Plán</span></div></div>
+      <div class="dk-card dk-step"><i class="dk-step__dot"></i><span class="dk-step__n">03</span><h3>Postavíme a&nbsp;nasadíme</h3><p>Krátké iterace, průběžně vidíte výsledek. Testujeme na reálných datech a&nbsp;nasazujeme bez dramat.</p><div class="dk-tags"><span>Iterace</span><span>Reálná data</span><span>Nasazení</span></div></div>
+      <div class="dk-card dk-card--accent dk-step"><i class="dk-step__dot"></i><span class="dk-step__n">04</span><h3>Staráme se a&nbsp;rozvíjíme</h3><p>Provoz, monitoring, podpora a&nbsp;další vývoj. Nezmizíme den po předání.</p><div class="dk-tags"><span>Monitoring</span><span>Podpora</span><span>Rozvoj</span></div></div>
+    </div>
+    <div class="dk-terms">
+      <div class="dk-card dk-term"><span data-i="tag"></span><div><b>Fixní cena</b><span>u&nbsp;jasně ohraničených zakázek</span></div></div>
+      <div class="dk-card dk-term"><span data-i="calendar"></span><div><b>Měsíční kapacita</b><span>u&nbsp;dlouhodobého rozvoje</span></div></div>
+      <div class="dk-card dk-term"><span data-i="sync"></span><div><b>Převezmeme i&nbsp;rozdělaný projekt</b><span>nejdřív řekneme, v&nbsp;jakém je stavu</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 13 · REFERENCE ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>13</b> / <i>15</i> · Reference</span></header>
+  <div class="dk-body dk-col">
+    <span class="dk-eyebrow"><i></i>Reference</span>
+    <h2 class="dk-h dk-h--row">Klienti, kteří <em>nám důvěřují.</em></h2>
+    <div class="dk-grid dk-grid--3 dk-refs">
+      <div class="dk-card dk-ref"><div class="dk-ref__logo"><img src="prezentace/assets/cot-white.svg" alt="" style="height:112px"></div><h3>Český olympijský výbor</h3><p>IT podpora, onboarding, podatelna, sociální sítě</p></div>
+      <div class="dk-card dk-ref"><div class="dk-ref__logo"><img src="prezentace/assets/waca-white.svg" alt="" style="height:104px"></div><h3>We Are Creative Agency</h3><p>3D konfigurátor obalů</p></div>
+      <div class="dk-card dk-ref"><div class="dk-ref__logo"><img src="prezentace/assets/fleysen-white.png" alt="" style="height:54px"></div><h3>Fleysen</h3><p>Migrace na Shopify a&nbsp;marketingová komunikace</p></div>
+      <div class="dk-card dk-ref"><div class="dk-ref__logo"><img src="prezentace/assets/blaho-white.svg" alt="" style="height:66px"></div><h3>Blaho &amp; work</h3><p>Chytré zámky, IoT a&nbsp;mobilní aplikace</p></div>
+      <div class="dk-card dk-ref"><div class="dk-ref__logo"><img src="assets/logos/glowly.svg?v=2" alt="" style="height:84px"></div><h3>Glowly</h3><p>Migrace ze Shoptetu na Shopify</p></div>
+      <div class="dk-card dk-ref"><div class="dk-ref__logo"><img src="assets/logos/honzabartos.svg" alt="" style="height:62px"></div><h3>Honza Bartoš</h3><p>Nastavení a&nbsp;měření <dk-nb>e-shopu</dk-nb> na Shopify</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 14 · SLOVY KLIENTŮ ══ -->
+<section class="dk-slide is-in">
+  <header class="dk-top"><img class="dk-top__logo" src="prezentace/assets/tetify-white.png" alt="Tetify"><span class="dk-top__num"><b>14</b> / <i>15</i> · Reference</span></header>
+  <div class="dk-body dk-col">
+    <span class="dk-eyebrow"><i></i>Co o&nbsp;nás říkají</span>
+    <h2 class="dk-h dk-h--row">Slovy <em>klientů.</em></h2>
+    <div class="dk-qrow">
+      <div class="dk-card dk-q">
+        <p>Pro migraci jsme se rozhodli v&nbsp;momentě, kdy jsme cítili, že pro nás Shoptet není dostatečný. Oslovili jsme proto Václava, který nám vysvětlil výhody Shopify proti Shoptetu, provedl nás celým procesem a&nbsp;postaral se o&nbsp;to, abychom měli plynulý přechod bez ztráty dat nebo díry v&nbsp;obratu. Ještě k&nbsp;tomu celý projekt doručil 14 dní před stanoveným deadlinem. Od té doby nám s&nbsp;<dk-nb>e-shopem</dk-nb> pomáhá na průběžné bázi a&nbsp;nemůžeme si jej vynachválit.</p>
+        <footer><i>D</i><div><b>David</b><span>glowly.cz</span></div></footer>
+      </div>
+      <div class="dk-card dk-q">
+        <p>Kompletní marketingová komunikace jak má být. Ať už jde o&nbsp;kampaně pro koncové zákazníky nebo podpora v&nbsp;oblasti B2B. Náš segment je poměrně náročný a&nbsp;jsem rád, že máme odpovídajícího partnery, s&nbsp;kterým se zvládneme posouvat a&nbsp;růst.</p>
+        <footer><i>FD</i><div><b>Filip Dušek</b><span>CEO, Fleysen</span></div></footer>
+      </div>
+    </div>
+    <div class="dk-qrow dk-qrow--rev">
+      <div class="dk-card dk-q">
+        <p>Tetify pro nás zajišťuje průběžnou správu sociálních sítí. Cením si jejich expertízy a&nbsp;efektivity. Dokáží se zapojit do našich inhouse týmu a&nbsp;zvědnout komunikaci. Jsou datoví a&nbsp;spolehliví.</p>
+        <footer><i>TH</i><div><b>Tomáš Houska</b><span>Head of Media House, Český olympijský výbor</span></div></footer>
+      </div>
+      <div class="dk-card dk-q">
+        <p>Spolupráce byla naprosto bezproblémová. Pomohl nám se správným nastavením a&nbsp;měřením <dk-nb>e-shopu</dk-nb> na platformě Shopify. Velmi oceňuji rychlou komunikaci a&nbsp;především kvalitně odvedenou práci. Vše proběhlo efektivně a&nbsp;s&nbsp;výsledkem, který splnil naše očekávání. Ráda doporučuji dál.</p>
+        <footer><i>J</i><div><b>Jana</b><span>honzabartos.cz</span></div></footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 15 · KONTAKT ══ -->
+<section class="dk-slide is-in">
+  <div class="dk-float" style="left:70px;top:112px;width:440px;transform:rotate(-4deg)">
+    <div class="dk-f-row">
+      <span class="dk-f-ico" data-i="chat"></span>
+      <div><b class="dk-f-title">Nezávazná konzultace</b><span class="dk-f-sub">Stačí vědět, co vás štve</span></div>
+    </div>
+  </div>
+  <div class="dk-float dk-float--pill" style="left:160px;top:330px;transform:rotate(3.5deg)"><span class="dk-toggle"></span>Odpověď do 24 hodin</div>
+  <div class="dk-float" style="left:52px;top:500px;width:420px;transform:rotate(-3deg)">
+    <span class="dk-f-label">Jak to bude probíhat</span>
+    <div class="dk-kv" style="grid-template-columns:auto 1fr"><span>01</span><b style="text-align:left">Pochopíme problém</b><span>02</span><b style="text-align:left">Navrhneme řešení</b><span>03</span><b style="text-align:left">Postavíme a&nbsp;nasadíme</b><span>04</span><b style="text-align:left">Staráme se a&nbsp;rozvíjíme</b></div>
+  </div>
+  <div class="dk-float" style="left:120px;top:850px;width:380px;transform:rotate(4.5deg)">
+    <div class="dk-f-row">
+      <span class="dk-f-ico" data-i="pin"></span>
+      <div><b class="dk-f-title">Praha &amp; Karlovy Vary</b><span class="dk-f-sub">Kde nás najdete</span></div>
+    </div>
+  </div>
+
+  <div class="dk-float" style="left:1460px;top:96px;width:372px;transform:rotate(4deg)">
+    <span class="dk-f-label">Spolupráce</span>
+    <b class="dk-f-title" style="margin-top:8px">Fixní cena nebo měsíční kapacita</b>
+    <span class="dk-f-sub">Vždy víte dopředu, kolik to stojí</span>
+  </div>
+  <div class="dk-float" style="left:1500px;top:372px;width:340px;transform:rotate(-3deg)">
+    <span class="dk-f-label">Vlastní produkty</span>
+    <div class="dk-kv" style="grid-template-columns:1fr auto"><b style="text-align:left">theis.cz</b><span class="dk-badge dk-badge--green">Live</span><b style="text-align:left">pokis.cz</b><span class="dk-badge dk-badge--green">Live</span><b style="text-align:left">qeris.cz</b><span class="dk-badge dk-badge--green">Live</span></div>
+  </div>
+  <div class="dk-float" style="left:1436px;top:668px;width:400px;transform:rotate(3deg)">
+    <span class="dk-f-label">O&nbsp;co jde?</span>
+    <div class="dk-badges" style="margin-top:12px"><span class="dk-badge dk-badge--green">Produkt na míru</span><span class="dk-badge">Interní systém</span><span class="dk-badge">AI integrace</span><span class="dk-badge"><dk-nb>E-shop</dk-nb></span><span class="dk-badge">IT podpora</span></div>
+  </div>
+  <div class="dk-float dk-float--toast" style="left:1520px;top:908px;transform:rotate(-4deg)"><span data-i="checkc"></span>Poptávka odeslána</div>
+
+  <div class="dk-center"><div class="dk-hero dk-hero--end">
+    <img class="dk-hero__logo" src="prezentace/assets/tetify-white.png" alt="Tetify">
+    <h2 class="dk-h">Popište nám problém.<br><em>Ozveme se do 24 hodin.</em></h2>
+    <p class="dk-lead">Nepotřebujeme hotové zadání. Stačí, když víte, co vás štve&nbsp;— zbytek vymyslíme společně.</p>
+    <div class="dk-fields">
+      <div class="dk-field"><span><dk-nb>E-mail</dk-nb></span><b>info@tetify.cz</b><i data-i="mail"></i></div>
+      <div class="dk-field"><span>Telefon</span><b>+420 602 618 220</b><i data-i="phone"></i></div>
+      <div class="dk-field"><span>Web</span><b>tetify.cz</b><i data-i="globe"></i></div>
+    </div>
+    <span class="dk-btn dk-btn--primary">Napsat nám <span data-i="arrow"></span></span>
+  </div></div>
+  <p class="dk-legal">© 2026 Tetify s.r.o. · IČO 23715227 · Korunní 2569/108, 101 00 Praha 10</p>
+</section>
+
+</main>
+
+<script>
+/* Tři věci, které by se v HTML zbytečně opakovaly:
+   1) ikony podle data-i, 2) číslování snímků, 3) náhledy projektů — ty se kopírují
+   přímo z index.html, takže prezentace vždy ukazuje totéž co web. */
+(async function () {
+  var I = {
+    arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+    checkc:'<circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.7 2.7L16 9.6"/>',
+    hash:'<path d="M9 4v16M15 4v16M4 9h16M4 15h16"/>',
+    unlock:'<rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 7.6-1.7"/>',
+    file:'<path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v4h4M9 12h6M9 16h4"/>',
+    spark:'<path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9L11 3Z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z"/>',
+    layers:'<path d="M12 3 3 7.5l9 4.5 9-4.5L12 3Z"/><path d="m3 12 9 4.5 9-4.5M3 16.5 12 21l9-4.5"/>',
+    list:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7.5 9h6M7.5 12.5h9M7.5 16h4"/>',
+    bag:'<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>',
+    nodes:'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.6M16.8 8.2l-3.6 7.6"/>',
+    shield:'<path d="M12 3l7 3v5.5c0 4.3-2.9 8-7 9.5-4.1-1.5-7-5.2-7-9.5V6l7-3Z"/><path d="m9 12 2.2 2.2L15.2 10"/>',
+    trend:'<path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/>',
+    chat:'<path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5v-7Z"/><path d="M8.5 9h7M8.5 12h4"/>',
+    cube:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+    pin:'<path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+    mail:'<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7.5l8 5.5 8-5.5"/>',
+    phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 17.5h2"/>',
+    globe:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/>',
+    tag:'<path d="M3 12.5V5a2 2 0 0 1 2-2h7.5L21 11.5 12.5 20 3 12.5Z"/><circle cx="8" cy="8" r="1.4"/>',
+    calendar:'<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+    sync:'<path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/>'
+  };
+  document.querySelectorAll('[data-i]').forEach(function (el) {
+    el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + (I[el.dataset.i] || '') + '</svg>';
+  });
+
+  var slides = document.querySelectorAll('.dk-slide');
+  slides.forEach(function (s, i) {
+    var n = s.querySelector('.dk-top__num');
+    if (!n) return;
+    n.querySelector('b').textContent = String(i + 1).padStart(2, '0');
+    n.querySelector('i').textContent = String(slides.length);
+  });
+
+  try {
+    var html = await (await fetch('index.html', { cache: 'no-store' })).text();
+    var site = new DOMParser().parseFromString(html, 'text/html');
+    document.querySelectorAll('[data-mock]').forEach(function (slot) {
+      var src = site.querySelector(slot.dataset.mock);
+      if (!src) { slot.textContent = 'Náhled ' + slot.dataset.mock + ' na webu není.'; return; }
+      var node = document.importNode(src, true);
+      // lazy obrázky by se při tisku do PDF nemusely stihnout načíst
+      node.querySelectorAll('img').forEach(function (img) { img.loading = 'eager'; img.removeAttribute('decoding'); });
+      slot.replaceWith(node);
+    });
+  } catch (e) {
+    console.error('Náhledy z index.html se nepodařilo načíst (prezentace musí běžet přes http, ne file://).', e);
+  }
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  document.documentElement.dataset.ready = '1';
+})();
+</script>
+</body>
+</html>

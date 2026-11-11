@@ -5,9 +5,10 @@
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const LIVE = 'https://tetify-d7f01.web.app/changelog';
-const root = join(dirname(new URL(import.meta.url).pathname), '..');
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dir = join(root, 'changelog');
 
 async function get(url) {

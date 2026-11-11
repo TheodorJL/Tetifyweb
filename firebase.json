@@ -59,12 +59,8 @@
         ]
       },
       {
-        "source": "/changelog/api/*.json",
+        "source": "/changelog",
         "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
           {
             "key": "Cache-Control",
             "value": "no-cache"
@@ -72,8 +68,21 @@
         ]
       },
       {
-        "source": "/changelog/**/*.xml",
+        "source": "/changelog/**",
         "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/changelog/api/*.json",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
           {
             "key": "Cache-Control",
             "value": "no-cache"

@@ -8,3 +8,7 @@
 .claude/
 
 node_modules/
+
+# /changelog: stahuje se z živého webu před deployem (scripts/changelog-pull.mjs),
+# zdroj je repo TheodorJL/Changelog
+/changelog/
